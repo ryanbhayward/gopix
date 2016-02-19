@@ -5,25 +5,17 @@
 
 /OriginX 0 def
 /OriginY 0 def
-%---------------- Variables -------------------
-
-/DimX 2 def
-/DimY 2 def
+/Rows 4 def
+/Cols 2 def
 /Scale 1.2 def
 
-
-% draw  Hex boards, any size ... but labels only up to 26x26
-% based on code by Cameron Browne, revised by Jack vR, revised by RBH
-%-------------- state initializations -------------------------
 1 setlinejoin   % lines meet at a point  ==>    use round join
-%---------------- constants -------------------
 /StoneRadius    3   Scale mul def 
 /LineWidth      0.1 Scale mul def 
 /PerimeterWidth 0.2 Scale mul def 
 /CellDiameter  10   Scale mul def 
 /BoardShade 0.8 def
 
-%----------- procedures -------------
 /ScalePoint { % stack: ... x y size ==> ...  x*size y*size
    3 dict begin /size exch def /y exch def /x exch def
    x size mul           y size mul
@@ -39,18 +31,18 @@ end } def
 /DrawGoBoard { 2 dict begin
     gsave
     newpath 0.5 0.5 GoPoint moveto
-    0    DimX     GoPoint rlineto
-    DimY 0        GoPoint rlineto
-    0    DimX neg GoPoint rlineto
+    0    Rows     GoPoint rlineto
+    Cols 0        GoPoint rlineto
+    0    Rows neg GoPoint rlineto
     closepath PerimeterWidth BoardShade FillAndStroke
     LineWidth setlinewidth
-    1 1 DimY { /y exch def
+    1 1 Cols { /y exch def
       newpath y 1 GoPoint moveto 
-      0 DimX 1 sub GoPoint rlineto stroke
+      0 Rows 1 sub GoPoint rlineto stroke
     } for
-    1 1 DimX { /x exch def
+    1 1 Rows { /x exch def
       newpath 1 x GoPoint moveto 
-      DimY 1 sub 0 GoPoint rlineto stroke
+      Cols 1 sub 0 GoPoint rlineto stroke
     } for
     grestore
 end } def
