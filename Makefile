@@ -2,24 +2,21 @@ LATEX = latex
 DVIPS = dvips -Ppdf -t letter
 PPR = gopic
 
-pdf: clean full good ps 
+$(PPR).pdf: $(PPR).ps
 	ps2pdf $(PPR).ps
 
-full:  
-	$(LATEX) $(PPR)
-	$(LATEX) $(PPR)
-	$(LATEX) $(PPR)
-	#bibtex $(PPR)
-	#$(LATEX) $(PPR)
-	#$(LATEX) $(PPR)
-	#$(LATEX) $(PPR)
+$(PPR).ps: $(PPR).dvi
+	$(DVIPS) -G0 $(PPR) -o
 
-ps: $(PPR).dvi
-	$(DVIPS) $(PPR) -o
+$(PPR).dvi: $(PPR).tex *.eps
+	$(LATEX) $(PPR)
 
-good: $(PPR).dvi
-	$(DVIPS) -Ppdf -G0 -tletter $(PPR) -o
+*.eps: *.gdg
+	./makegdg.sh
+
+*.gdg: 
+	./makegdg.sh
 
 clean:
 	-@rm $(PPR).dvi $(PPR).aux $(PPR).log $(PPR).ps $(PPR).pdf
-
+	-@./cleangdg.sh

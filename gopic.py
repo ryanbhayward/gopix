@@ -1,32 +1,41 @@
+# convert Go diagram to .eps file
 import sys
+CellRadius    = 10 
+Blackchars = 'bBxX'
+Whitechars = 'wWoO'
+Emptychars = '.-_'
 
-CellRadius    =  5
-StoneRadius   = 4
-BoardShade    = .8
-
-def goPoint(x,y):
-  return str((2*x+1)*CellRadius)+ ' ' + str((2*y+1)*CellRadius)
-
-def getLines():
+def getDiagram():
   L = sys.stdin.readlines()
-  for k in range(len(L)):
-    L[k] = L[k].rstrip()
-  return L
+  for k in range(len(L)): L[k] = L[k].strip()
+  return L, len(L), len(L[0].split())
 
-def printHeader(rows, cols):
+def printHead(rows, cols):
   print '%!PS-Adobe-3.0'
-  print '%%BoundingBox: 0 0 ' + \
-    str((1+cols)*2*CellRadius) + ' ' + \
-    str((1+rows)*2*CellRadius)
+  print '%%BoundingBox: 0 0', cols*2*CellRadius, rows*2*CellRadius
   print '%%Pages: 0\n%%EndComments'
   print '/OriginX 0 def\n/OriginY 0 def'
+  print '/Rows', rows, 'def\n/Cols', cols,'def'
+  print '/CellDiameter ', 2*CellRadius
 
-L = getLines()
-for line in L:
-  for x in line.strip():
-    print x,
-  print ''
+def printBody():
+  f = open('gopic.epsbody','r')
+  for line in f: print line,
 
-printHeader(2,2)
-print goPoint(0,1)
-print goPoint(0,0)
+def printTail(L,rows,cols):
+  for  c in range(cols):
+    for r in range(rows):
+      s = L[r].split()[c]
+      if s in Blackchars: print c+1, rows-r, 'B'
+      elif s in Whitechars: print c+1, rows-r, 'W'
+      elif s in Emptychars: pass
+      else: 
+        print c+1,rows-r, '('+s+')', len(s),
+        if 1==(int(s)%2): print 'BL'
+        else:             print 'WL'
+  print 'showpage'
+
+L, rows, cols = getDiagram()
+printHead(rows,cols)
+printBody()
+printTail(L,rows,cols)
