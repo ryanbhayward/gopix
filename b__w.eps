@@ -1,0 +1,70 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 0 0 30 30
+%%Pages: 0
+%%EndComments
+
+/OriginX 0 def
+/OriginY 0 def
+%---------------- Variables -------------------
+
+/DimX 2 def
+/DimY 2 def
+/Scale 1.2 def
+
+
+% draw  Hex boards, any size ... but labels only up to 26x26
+% based on code by Cameron Browne, revised by Jack vR, revised by RBH
+%-------------- state initializations -------------------------
+1 setlinejoin   % lines meet at a point  ==>    use round join
+%---------------- constants -------------------
+/StoneRadius    3   Scale mul def 
+/LineWidth      0.1 Scale mul def 
+/PerimeterWidth 0.2 Scale mul def 
+/CellDiameter  10   Scale mul def 
+/BoardShade 0.8 def
+
+%----------- procedures -------------
+/ScalePoint { % stack: ... x y size ==> ...  x*size y*size
+   3 dict begin /size exch def /y exch def /x exch def
+   x size mul           y size mul
+end } def
+
+/FillAndStroke { 2 dict begin /sh exch def /wdth exch def
+    gsave sh setgray fill
+    grestore 0 setgray wdth setlinewidth stroke
+end } def
+
+/GoPoint { CellDiameter ScalePoint } def
+
+/DrawGoBoard { 2 dict begin
+    gsave
+    newpath 0.5 0.5 GoPoint moveto
+    0    DimX     GoPoint rlineto
+    DimY 0        GoPoint rlineto
+    0    DimX neg GoPoint rlineto
+    closepath PerimeterWidth BoardShade FillAndStroke
+    LineWidth setlinewidth
+    1 1 DimY { /y exch def
+      newpath y 1 GoPoint moveto 
+      0 DimX 1 sub GoPoint rlineto stroke
+    } for
+    1 1 DimX { /x exch def
+      newpath 1 x GoPoint moveto 
+      DimY 1 sub 0 GoPoint rlineto stroke
+    } for
+    grestore
+end } def
+
+/GoStone { 3 dict begin /shade exch def /j exch def /i exch def
+    newpath
+    i j GoPoint StoneRadius 0 360 arc
+    LineWidth shade FillAndStroke
+end } def
+
+/W { 1.0 GoStone } def
+/B { 0.0 GoStone } def
+
+DrawGoBoard
+1 1 B
+2 2 W
+showpage
