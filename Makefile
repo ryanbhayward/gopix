@@ -8,14 +8,9 @@ $(PPR).pdf: $(PPR).ps
 $(PPR).ps: $(PPR).dvi
 	$(DVIPS) -G0 $(PPR) -o
 
-$(PPR).dvi: $(PPR).tex *.eps
+$(PPR).dvi: $(PPR).tex *.gdg
+	./makegdg.sh
 	$(LATEX) $(PPR)
-
-*.eps: *.gdg
-	./makegdg.sh
-
-*.gdg: 
-	./makegdg.sh
 
 clean:
 	-@rm $(PPR).dvi $(PPR).aux $(PPR).log $(PPR).ps $(PPR).pdf
