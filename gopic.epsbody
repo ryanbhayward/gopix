@@ -21,7 +21,7 @@ end } def
 
 /DrawGoBoard { 2 dict begin
     gsave
-    newpath 0.5 0.5 GoPoint moveto
+    newpath .5 .5 GoPoint moveto
     0    Rows     GoPoint rlineto
     Cols 0        GoPoint rlineto
     0    Rows neg GoPoint rlineto
@@ -91,4 +91,5 @@ end } def
 /WL {1.0 GoStoneLabelled } def
 /BL {0.0 GoStoneLabelled } def
 
+-.5 -.5 GoPoint translate
 DrawGoBoard
