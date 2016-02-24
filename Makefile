@@ -8,7 +8,7 @@ $(PPR).pdf: $(PPR).ps
 $(PPR).ps: $(PPR).dvi
 	$(DVIPS) -G0 $(PPR) -o
 
-$(PPR).dvi: $(PPR).tex *.gdg
+$(PPR).dvi: $(PPR).tex gopic.epsbody *.gdg
 	./makegdg.sh
 	$(LATEX) $(PPR)
 

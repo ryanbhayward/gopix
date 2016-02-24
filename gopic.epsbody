@@ -27,13 +27,19 @@ end } def
     0    Rows neg GoPoint rlineto
     closepath PerimeterWidth BoardShade FillAndStroke
     LineWidth setlinewidth
-    1 1 Cols { /y exch def
-      newpath y 1 GoPoint moveto 
-      0 Rows 1 sub GoPoint rlineto stroke
+    1 1 Cols { /y exch def  % if only 1 Row, then nonzero length
+      Rows 1 eq { newpath y .9 GoPoint moveto 
+                  0 Rows .8 sub GoPoint rlineto stroke } {
+                  newpath y 1 GoPoint moveto 
+                  0 Rows 1 sub GoPoint rlineto stroke
+      } ifelse
     } for
-    1 1 Rows { /x exch def
-      newpath 1 x GoPoint moveto 
-      Cols 1 sub 0 GoPoint rlineto stroke
+    1 1 Rows { /x exch def  % if only 1 Col, then nonzero length
+      Cols 1 eq { newpath .9 x GoPoint moveto 
+                  Cols .8 sub 0 GoPoint rlineto stroke } {
+                  newpath 1 x GoPoint moveto 
+                  Cols 1 sub 0 GoPoint rlineto stroke
+      } ifelse
     } for
     grestore
 end } def
