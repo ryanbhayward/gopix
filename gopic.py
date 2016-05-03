@@ -16,7 +16,6 @@ def printHead(rows, cols):
   print '%%Pages: 0\n%%EndComments'
   print '/OriginX 0 def\n/OriginY 0 def'
   print '/Rows', rows, 'def\n/Cols', cols,'def'
-  print '/CellDiameter ', 2*CellRadius
 
 def printBody():
   f = open('gopic.epsbody','r')
