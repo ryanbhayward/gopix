@@ -7,6 +7,8 @@ pdf: clean full good ps
 
 full: 
 	$(LATEX) $(PPR)
+	$(LATEX) $(PPR)
+	$(LATEX) $(PPR)
 
 ps: $(PPR).dvi
 	$(DVIPS) $(PPR) -o

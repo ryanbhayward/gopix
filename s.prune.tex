@@ -129,7 +129,7 @@ so $r_1 = \mu_x(V_1) \leq \mu_x(V_0) = r_0$, and we have
 \end{proof}
 
 
-\begin{corollary}
+\begin{corollary}\label{cor}
 For some $k\geq 1$,
 let $S=(\mP,x)$ be a linear go state
 such that the set of empty cells to which
@@ -155,7 +155,7 @@ of the two positions of the previous theorem.
 The proof is the same.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{cor2}
 For some $k\geq 1$,
 let $S=(\mP,x)$ be a linear go state
 such that the current position has x at cells 1,\ldots, k,
@@ -164,8 +164,87 @@ $x$ has a legal move includes both $0$ and $k+1$.
 Then the minimax value for $x$ for the move to $k+1$
 is at least as good as the minimax value for the move to 0.
 \end{corollary}
-
 \vfill~
 
-We can use the above corollaries to prune moves when
-finding the minimax value of a linear go state.
+We can use the corollaries to prune moves when solving states.
+Let us solve the initial position of 1$\times$4 go.
+Up to ismorphism symmetry, there are 3 initial moves to consider:
+pass, cell 0, cell 1.
+
+\[\begin{tikzpicture}[x=1cm, y=1.5cm
+  ,every edge/.style={draw, postaction={decorate,decoration={markings,}}}
+]
+\vertex (a) at (5,9) {\pic{----}};
+\vertex (b) at (3,8) { };
+\vertex (c) at (5,8) {\pic{x---}};
+\vertex (d) at (7,8) {\pic{-x--}};
+\path
+(a) edge (b) edge (c) edge (d)
+;
+\end{tikzpicture}\]
+
+By Corollary~\ref{cor}, the move to 
+{\tt (- x - -)} is at least as good
+as the move to 
+{\tt (x - - -)}, so we prune the latter move.
+Now let us explore the next levels from {\tt (- x - -)}.
+
+\[\begin{tikzpicture}[x=1cm, y=1.5cm
+  ,every edge/.style={draw, postaction={decorate,decoration={markings,}}}
+]
+\vertex (a) at (5,9) {\pic{----}};
+\vertex (b) at (3,8) { };
+\vertex (d) at (7,8) {\pic{-x--}};
+\vertex (e) at (5,7) { };
+\vertex (f) at (7,7) {\pic{-xo-}};
+\vertex (g) at (9,7) {\pic{-x-o}};
+\path
+(a) edge (b) edge (d)
+(d) edge (e) edge (f) edge (g)
+;
+\end{tikzpicture}\]
+
+Now we can prune {\tt (- x - o)}.
+\[\begin{tikzpicture}[x=1cm, y=1.5cm
+  ,every edge/.style={draw, postaction={decorate,decoration={markings,}}}
+]
+\vertex (a) at (5,9) {\pic{----}};
+\vertex (b) at (3,8) { };
+\vertex (d) at (7,8) {\pic{-x--}};
+\vertex (e) at (5,7) { };
+\vertex (f) at (7,7) {\pic{-xo-}};
+\vertex (h) at (3.5,6) { };
+\vertex (i) at (4.5,6) {\pic{xx--}};
+\vertex (j) at (5.5,6) {\pic{-xx-}};
+\vertex (k) at (6.5,6) {\pic{-x-x}};
+%\vertex (l) at (8,6) {\pic{-x-x}};
+\path
+(a) edge (b) edge (d)
+(d) edge (e) edge (f)
+(e) edge (h) edge (i) edge (j) edge (k)
+;
+\end{tikzpicture}\]
+By Corollary~\ref{cor2},
+we can prune {\tt (x x - -)}.
+By Corollary~\ref{cor},
+we can prune {\tt (- x - x)}.
+\[\begin{tikzpicture}[x=1cm, y=1.5cm
+  ,every edge/.style={draw, postaction={decorate,decoration={markings,}}}
+]
+\vertex (a) at (5,9) {\pic{----}};
+\vertex (d) at (5,8) {\pic{-x--}};
+\vertex (e) at (3,7) { };
+\vertex (f) at (7,7) {\pic{-xo-}};
+\vertex (j) at (3,6) {\pic{-xx-}};
+\vertex (l) at (7,6) {\pic{-x-x}};
+\path
+(a) edge (d)
+(d) edge (e) edge (f)
+(e) edge (j)
+(f) edge (l)
+;
+\end{tikzpicture}\]
+Here is the final proof tree:
+for each x-turn, we show a best move;
+for each o-turn, we show all non-pruned moves.
+The minimax score for x is 4.
