@@ -1,0 +1,18 @@
+\documentclass[12pt]{article}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{graphicx,url,tikz}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\newtheorem{theorem}{Theorem}
+\usetikzlibrary{arrows,decorations.markings}
+\tikzstyle{vertex}=[circle, draw, inner sep=1pt, minimum size=8pt]
+\newcommand{\pic}[1]{{\footnotesize\tt #1}}
+\newcommand{\vertex}{\node[vertex]}
+\newcommand{\ttld}{{\textasciitilde}}
+\pagestyle{plain}
+\setlength{\parskip}{.5em}
+\includeonly{s.prune}
+\begin{document}
+\include{s.lgo}
+\include{s.ewin}
+\include{s.prune}
+\end{document}

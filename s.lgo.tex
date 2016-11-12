@@ -1,0 +1,84 @@
+\hfill{\Large\bf cmput 396 ~ solving linear go ~ prof hayward}\hfill~
+
+\section*{linear go}
+We discuss briefly
+the problem of solving go on small boards.
+We consider
+{\bf linear go}, ie.\ go on a 1$\times$$n$ board, for some $n$.
+We will consider the simplest go rule set:
+Tromp-Taylor (so, positional superko)
+with no suicide (so, each move is either pass,
+or a play that leaves the stone played in a group
+that has at least one liberty).
+
+Anyone can solve any go position, given enough time and space:
+just build the complete minimax search tree.
+But, as you can see from the examples below, the
+game trees can get large, so our goal is
+to use efficient algorithms and
+{\bf to prune child moves that do not change the 
+parent's minimax value}.
+
+Here is the game tree for 1x2 go with, 
+at each node, isomorphic children pruned.
+
+\[\begin{tikzpicture}[x=1cm, y=1cm
+  ,every edge/.style={draw, postaction={decorate,decoration={markings,}}}
+]
+\vertex (a) at (5,9) {\pic{--}};
+\vertex (b) at (3.5,8) { };
+\vertex (c) at (6.5,8) {\pic{x-}};
+\vertex (d) at (3,7) { };
+\vertex (e) at (4,7) {\pic{o-}};
+\vertex (f) at (6,7) { };
+\vertex (g) at (7,7) {\pic{-o}};
+\vertex (h) at (3.5,6) { };
+\vertex (i) at (4.5,6) {\pic{-x}};
+\vertex (j) at (6,6) {};
+\vertex (k) at (7,6) {};
+\vertex (l) at (3.5,5) {};
+\vertex (m) at (4.5,5) {};
+\vertex (n) at (7,5) {};
+\vertex (o) at (4.5,4) {};
+\path
+(a) edge (b) edge (c)
+(b) edge (d) edge (e)
+(c) edge (f) edge (g)
+(e) edge (h) edge (i)
+(f) edge (j)
+(g) edge (k)
+(h) edge (l)
+(i) edge (m)
+(k) edge (n)
+(m) edge (o)
+;
+\end{tikzpicture}\]
+
+Here is the game tree (top 3 levels only)
+for 1x3 go with, at each node, isomorphic children pruned.
+On the diagram, draw the next level of the tree.
+Then, on the diagram,
+label each node with the first-player minimax score.
+
+\[\begin{tikzpicture}[x=1cm, y=2cm
+  ,every edge/.style={draw, postaction={decorate,decoration={markings,}}}
+]
+\vertex (a) at (5,9) {\pic{---}};
+\vertex (b) at (2,8) { };
+\vertex (c) at (5,8) {\pic{x--}};
+\vertex (d) at (8,8) {\pic{-x-}};
+\vertex (e) at (1,7) { };
+\vertex (f) at (2,7) {\pic{o--}};
+\vertex (g) at (3,7) {\pic{-o-}};
+\vertex (h) at (4,7) { };
+\vertex (i) at (5,7) {\pic{xx-}};
+\vertex (j) at (6,7) {\pic{x-x}};
+\vertex (k) at (8,7) { };
+\path
+(a) edge (b) edge (c) edge (d)
+(b) edge (e) edge (f) edge (g)
+(c) edge (h) edge (i) edge (j)
+(d) edge (k)
+;
+\end{tikzpicture}\]
+\vfill~

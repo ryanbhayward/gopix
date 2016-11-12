@@ -1,0 +1,58 @@
+\section*{a pruning theorem}
+Define a go state $S=(P,x)$ by the history $P = (P_0, \ldots, P_t)$
+of board positions $P_j$, 
+where $P_0$ and $P_t$ 
+are respectively the original and current position,
+and $|P| = t+1$ is the number of positions in the history;
+and by the player to move (ptm) $x$.
+
+We label the cells of the linear go board from 0 to $n-1$
+in the obvious way, ie.\ so that,
+for $1 \leq j \leq n-1$, cells $j-1$ and $j$ are neighbours.
+
+For a go state $S$, 
+$\mu_x(S)$ is the minimax value for $x$ of $S$.
+
+\begin{theorem}
+Consider a linear go position $S=(H,P,x)$
+with cells 1,2 both empty for all positions in the history.
+Let $S_1$ (respectively $S_2$)
+be the state obtained from $S$ after $x$ plays at cell 1 (cell 2).
+Then $\mu_x(S_1) \leq \mu)x(S_2)$.
+\end{theorem}
+
+{\bf corollary}
+
+In solving $S$, we can prune $S_1$.
+
+~
+
+Schematically we have $S=$ {\tt --"}, 
+$S_1=$ {\tt x-"}, 
+$S_2=$ {\tt -x"},
+where {\tt -} represents an empty cell and {\tt "} represents cells 3\ldots$n$.
+
+~
+
+{\bf sketch of proof}
+
+In the game tree, the children of $S_1$ are
+{\tt -o"}, and (for every legal subposition {\tt '} of {\tt "} obtained
+by a legal x-move) {\tt x-'}.
+The children of $S_2$ are
+(possibly, if the capture works)
+{\tt o-"}, and {\tt -x'}.
+
+We argue by induction 
+(we need to reformulate the statement of the theorem so
+that it holds for any states reached from the original
+by a parallel sequence of moves, ie.\ that differ only
+by interchanging cells 1 and 2)
+on {\tt "} that
+$\mu_o(${\tt o-"}$) \leq \mu_o(${\tt -o"}), so
+$\mu_x(${\tt -o"}$) \leq \mu_x(${\tt o-"}).
+$\mu_x(${\tt x-'}$) \leq \mu_x(${\tt -x'}).
+This, and the fact that {\tt -o"} exists (even though {\tt o-"} exists
+only if the capture is legal)
+implies that $\mu_x(${\tt x-"}$=S_1) \leq \mu_x(${\tt -x"}$=S_2)$.
+\vfill~
