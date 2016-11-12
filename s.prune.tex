@@ -100,18 +100,72 @@ the position $Q_1$ obtained from the o-move to c from $S^1$.
 Also, the hypotheses of the theorem apply to $Q_0$ and $Q_1$,
 so by induction we can assume that
 $\mu_x(Q_0) \leq \mu_x(Q_1)$.
-
-We argue by induction 
-(we need to reformulate the statement of the theorem so
-that it holds for any states reached from the original
-by a parallel sequence of moves, ie.\ that differ only
-by interchanging cells 1 and 2)
-on {\tt "} that
-$\mu_o(${\tt o-"}$) \leq \mu_o(${\tt -o"}), so
-$\mu_x(${\tt -o"}$) \leq \mu_x(${\tt o-"}).
-$\mu_x(${\tt x-'}$) \leq \mu_x(${\tt -x'}).
-This, and the fact that {\tt -o"} exists (even though {\tt o-"} exists
-only if the capture is legal)
-implies that $\mu_x(${\tt x-"}$=S_1) \leq \mu_x(${\tt -x"}$=S_2)$.
+In the first case, $\mu_x(S_j) = \min_c \{\mu_x(Q_j)\}$
+for each $j=0,1$, so
+\[ \mu_x(S_0) \: = \: 
+\min_c \{\mu_x(Q_0)\} \: \leq \:
+\min_c \{\mu_x(Q_1)\} \: = \: 
+\mu(S_1) \: , \]
+and we are done.
+In the second case, $L^0$ contains all the moves of $L^1$,
+and one more, which has minimax value say $r$, so
+\[ \mu_x(S_0) \: = \: 
+\min \{ \: \min_c \{\mu_x(Q_0)\} \; , r \: \} \:  \leq \: 
+\min_c \{\mu_x(Q_1)\} \: = \: 
+\mu(S_1) \: , \]
+and again we are done.
+In the third case,
+let $V_1$ ($V_0$) be the position
+obtained by an o-move from $S_0$ ($S_1$) to cell 1 (cell 0),
+let $\mu_o(V_1)$, let $r_0 = \mu_o(V_0)$.
+The hypotheses of the theorem apply after exchanging o for x,
+so $\mu_o(V_0) \leq \mu_o(V_1)$ by induction.
+Also, for any position $A$, $\mu_o(R) = - \mu_x(R)$,
+so $r_1 = \mu_x(V_1) \leq \mu_x(V_0) = r_0$, and we have
+\[ \mu_x(S_0) \: = \: 
+\min \{ \: \min_c \{\mu_x(Q_0)\} \; , r_1 \: \} \: \leq \: 
+\min \{ \: \min_c \{\mu_x(Q_1)\} \; , r_0 \: \} \: = \:
+\mu(S_1) \: . \]
 \end{proof}
+
+
+\begin{corollary}
+For some $k\geq 1$,
+let $S=(\mP,x)$ be a linear go state
+such that the set of empty cells to which
+$x$ has a legal move includes both $0$ and $1$.
+Then the minimax value for $x$ for the move to $1$
+is at least as good as the minimax value for the move to 0.
+\end{corollary}
+
+\begin{theorem}
+For $k\geq 1$,
+let $S^0 =(\mP,z)$ be a go state in which the current position
+$P_j$ has cells $\{0,\ldots,k-1\}$ $x$ and cell $k$ empty.
+Let $\mP' = \phi(0,k,\mP)$, and let
+$S^1 = (\mP',z)$ be a valid go state, ie.\ the sequence
+of positions in $S_1$ corresponds to a sequence of legal moves.
+Then $\mu_x(S^0) \leq \mu_x(S^1)$.
+\end{theorem}
+
+\begin{proof}
+The two positions here correspond to the positions obtained by
+inserting $k-1$ x's between cells 0 and 1 
+of the two positions of the previous theorem.
+The proof is the same.
+\end{proof}
+
+\begin{corollary}
+For some $k\geq 1$,
+let $S=(\mP,x)$ be a linear go state
+such that the current position has x at cells 1,\ldots, k,
+and the set of empty cells to which
+$x$ has a legal move includes both $0$ and $k+1$.
+Then the minimax value for $x$ for the move to $k+1$
+is at least as good as the minimax value for the move to 0.
+\end{corollary}
+
 \vfill~
+
+We can use the above corollaries to prune moves when
+finding the minimax value of a linear go state.
