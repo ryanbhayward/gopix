@@ -1,47 +1,105 @@
 \section*{a pruning theorem}
-Define a go state $S=(P,x)$ by the history $P = (P_0, \ldots, P_t)$
+Here, we discuss go assuming no-suicide Tromp-Taylor rules,
+so with the positional superko rule.
+
+So, define the {\em history} of a go state as the sequence
+$\mP = (P_0, \ldots, P_{t-1})$
 of board positions $P_j$, 
-where $P_0$ and $P_t$ 
+where $P_0$ and $P_{t-1}$ 
 are respectively the original and current position,
-and $|P| = t+1$ is the number of positions in the history;
+and $|\mP| = t$ is the number of positions in the history.
+Define a {\em go state} $S=(\mP,x)$ by its history $\mP$
 and by the player to move (ptm) $x$.
 
-We label the cells of the linear go board from 0 to $n-1$
+Label the cells of the linear go board from 0 to $n-1$
 in the obvious way, ie.\ so that,
 for $1 \leq j \leq n-1$, cells $j-1$ and $j$ are neighbours.
 
 For a go state $S$, 
 $\mu_x(S)$ is the minimax value for $x$ of $S$.
 
+For cells $x,y$ of a position $P$,
+the {\em x,y-interchange} $\phi(x,y,P)$ of $P$ is
+the position $P'$ obtained from $P$ by 
+interchanging the contents of cells $x$ and $y$.
+For example,
+let $P$ be the linear go position {\tt ( x - o o - ) }.
+Then $\phi(0,1,P)$ is the position {\tt ( - x o o - ) }.
+
+Similarly,
+the {\em x,y-interchange} $\phi(x,y,\mP)$ of $\mP$
+is the history $\mP'$ obtained from $S$ by interchanging
+the contents of cells $x$ and $y$ in each position $P_j$ of $\mP$.
+
 \begin{theorem}
-Consider a linear go position $S=(H,P,x)$
-with cells 1,2 both empty for all positions in the history.
-Let $S_1$ (respectively $S_2$)
-be the state obtained from $S$ after $x$ plays at cell 1 (cell 2).
-Then $\mu_x(S_1) \leq \mu)x(S_2)$.
+Let $S^0 =(\mP,z)$ be a go state in which the current position
+$P_j$ has cell 0 $x$ and cell 1 empty.
+Let $\mP' = \phi(0,1,\mP)$, and let
+$S^1 = (\mP',z)$ be a valid go state, ie.\ the sequence
+of positions in $S_1$ corresponds to a sequence of legal moves.
+Then $\mu_x(S^0) \leq \mu_x(S^1)$.
 \end{theorem}
 
-{\bf corollary}
-
-In solving $S$, we can prune $S_1$.
-
-~
-
-Schematically we have $S=$ {\tt --"}, 
-$S_1=$ {\tt x-"}, 
-$S_2=$ {\tt -x"},
-where {\tt -} represents an empty cell and {\tt "} represents cells 3\ldots$n$.
+We will sometimes represent positions pictorially:
+eg.\ ({\tt x - }$\rho$) is a position with cell 0 x, cell 1 empty,
+and remaining cell sequence $\rho$.
 
 ~
 
-{\bf sketch of proof}
+\begin{proof}
+The current positions of $S^0$ and $S^1$ are respectively
+({\tt x - }$\rho$) and ({\tt - x }$\rho$).
+We want to find the minimax value for x of $S^0$ and $S^1$,
+so let the player-to-move z be o, the opponent of x. 
 
-In the game tree, the children of $S_1$ are
-{\tt -o"}, and (for every legal subposition {\tt '} of {\tt "} obtained
-by a legal x-move) {\tt x-'}.
-The children of $S_2$ are
-(possibly, if the capture works)
-{\tt o-"}, and {\tt -x'}.
+First assume that $S_0$ is a terminal state:
+the last move was pass, as was the immediately previous move by x.
+Notice that this implies $S_1$ is also terminal.
+Here, the minimax value is just the Tromp-Taylor score:
+if the first non-empty cell in $\rho$ is x, $\mu_x(S_0)=\mu_x(S_1)$;
+if not, $\mu_x(S_0) = \mu_x(S_1) - 1$.
+So the theorem holds.
+
+Next assume that neither $S_0$ nor $S_1$ are terminal.
+Let $L^0$ and $L^1$
+be the set of legal moves for o from $S^0$ and $S^1$ respectively.
+$\mP'$ is the 0,1-interchange of $\mP$,
+so $L^0 - \{0,1\} = L^* = L^1 - \{0,1\}$.
+
+From $S^0$,
+the move by o to cell 1 captures the x in cell 0,
+so 1 is in $L^0$ if and only if the resulting position
+({\tt - - }$\rho'$) is not in $\mP$,
+where $\rho' = \rho$ unless $\rho$ begins with a sequence
+$\sigma$ of consecutive x's followed by either o or the end of the board,
+in which case these x's are also captured when o plays at cell 1.
+
+Now consider from $S^1$ the move by o to cell 0.
+If $\rho' = \rho$, then $\rho$ does not begin with a sequence $\sigma$
+as described above, and this move does not capture the x
+at cell 1, so this move is not legal.
+Also, if $\rho' \neq \rho$, then
+$\rho$ does begin with $\sigma$,
+and so the position after o captures the x's at cells \{1\} 
+and the locations of $\sigma$ will be exactly the same,
+except for interchanging cells 0 and 1,
+as the position after o captures the x's by playing at cell 1 from $S^0$.
+So, since $\mP'$ is the 0,1-interchange of $\mP$,
+if this move by o from $S^1$ to cell 0 is legal,
+the so is the move by 1 from $S^0$ to cell 1.
+
+So there are 3 cases:
+$L^0 = L^* = L_1$;
+$L^0 = L^* \cup \{1\}, L_1 = L*$;
+$L^0 = L^* \cup \{1\}, L_1 = L* \cup \{0\}$.
+
+In each case, observe that for every cell $c$ in $L^*$,
+the position $Q_0$ obtained from the o-move to c from $S^0$ 
+is the 0,1-interchange of 
+the position $Q_1$ obtained from the o-move to c from $S^1$.
+Also, the hypotheses of the theorem apply to $Q_0$ and $Q_1$,
+so by induction we can assume that
+$\mu_x(Q_0) \leq \mu_x(Q_1)$.
 
 We argue by induction 
 (we need to reformulate the statement of the theorem so
@@ -55,4 +113,5 @@ $\mu_x(${\tt x-'}$) \leq \mu_x(${\tt -x'}).
 This, and the fact that {\tt -o"} exists (even though {\tt o-"} exists
 only if the capture is legal)
 implies that $\mu_x(${\tt x-"}$=S_1) \leq \mu_x(${\tt -x"}$=S_2)$.
+\end{proof}
 \vfill~

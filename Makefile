@@ -15,4 +15,4 @@ good: $(PPR).dvi
 	$(DVIPS) -Ppdf -G0 -tletter $(PPR) -o
 
 clean:
-	-rm $(PPR).dvi $(PPR).blg $(PPR).bbl $(PPR).aux $(PPR).log $(PPR).ps $(PPR).pdf
+	-rm $(PPR).dvi $(PPR).blg $(PPR).bbl *.aux *.log $(PPR).ps $(PPR).pdf
