@@ -1,0 +1,76 @@
+\section*{early win detection}
+One way to prune moves is with {\bf early win detection:}
+recognize the final minimax score before
+the final state is reached.
+For example, 
+sometimes it can be seen by examining a position
+that, regardless of the game history
+(which can make moves illegal by the superko rule),
+white has no legal moves.
+
+
+One form of win detection uses {\bf Benson-safe positions}.
+We will call a linear go position {\bf black Benson-safe}
+if from that position, regardless
+of game history,
+the only legal white move is pass.
+\noindent
+{\bf observe: ~}
+
+{\bf for any shape empty go board,
+the first-player minimax score $t$ is non-negative.}
+
+\noindent
+{\bf proof. ~}
+use strategy stealing.
+argue by contradiction:
+assume $t$ negative.
+consider game after first move is pass.
+now opponent has empty board.
+~
+case 1: opponent passes, game ends, score 0.
+~
+case 2: opponent does not pass.
+from this point, after exchanging 
+the names of the players,
+the game tree is identical to the
+original game tree,
+so opponent's minimax score is $t < 0$,
+so opponent prefers case 1, pass, minimax score 0.
+~
+so, from original position,
+first player has a move (pass) with minimax score 0,
+which is greater than the minimax score $t$, contradiction.
+~ qed.
+\vfill
+
+\noindent
+{\bf similarly:}
+
+{\bf for any shape empty go board,
+let first-player minimax score be $t$.
+then first-player minimax score
+after first move pass is $-t$.}
+~ 
+we leave the proof as an exercise.
+\vfill
+
+\[\begin{tikzpicture}[x=1cm, y=2cm
+  ,every edge/.style={draw, postaction={decorate,decoration={markings,}}}
+]
+\vertex (a) at (5,10) [label=right:a]{\pic{-----}};
+\vertex (b) at (2, 9) [label=right:-a]{ };
+\vertex (c) at (4, 9) [label=right:b]{\pic{x----}};
+\vertex (d) at (6, 9) [label=right:c]{\pic{-x---}};
+\vertex (e) at (8, 9) [label=right:d]{\pic{--x--}};
+\vertex (f) at (4, 8) [label=right:$\leq$-c]{\pic{-o---}};
+\vertex (g) at (6, 8) {\pic{-x-o-}};
+\vertex (h) at (8, 8) {\pic{--xo-}};
+\path
+(a) edge (b) edge (c) edge (d) edge (e)
+(c) edge (f)
+(d) edge (g)
+(e) edge (h)
+;
+\end{tikzpicture}\]
+\vfill~
