@@ -248,3 +248,32 @@ Here is the final proof tree:
 for each x-turn, we show a best move;
 for each o-turn, we show all non-pruned moves.
 The minimax score for x is 4.
+
+\section*{problem with proof}
+proof becomes messy if good move captures
+
+eg
+
+\begin{verbatim}
+- - o o o o x - sigma, 2 replies are
+
+- x - - - - x - sigma     <- good move
+x - o o o o x - sigma     <- bad move
+\end{verbatim}
+
+problem: opponent has more options after good move.
+
+can refill captured area, we have no way to decide
+what to do... 2 options:
+
+a) pass in response to each move
+into captured set  
+
+b) if there is a unique response to 
+an evetual move by o to cell 2, then just play that way
+
+observation:
+if we assume cells 1 and 2 have never been played,
+then when the stones at 3,4,5,6 in this example were played,
+it was for each the 1st time those cells were occupied
+(because capture would require that cell 2 be played at)
