@@ -1,6 +1,6 @@
 LATEX = latex
 DVIPS = dvips -Ppdf -t letter
-PPR = goboards
+PPR = lgo_small
 
 $(PPR).pdf: $(PPR).ps
 	ps2pdf $(PPR).ps
