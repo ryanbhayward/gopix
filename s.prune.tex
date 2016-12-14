@@ -1,4 +1,4 @@
-\section*{a pruning theorem}
+\section*{a pruning conjecture}
 Here, we discuss go assuming no-suicide Tromp-Taylor rules,
 so with the positional superko rule.
 
@@ -31,14 +31,46 @@ the {\em x,y-interchange} $\phi(x,y,\mP)$ of $\mP$
 is the history $\mP'$ obtained from $S$ by interchanging
 the contents of cells $x$ and $y$ in each position $P_j$ of $\mP$.
 
-\begin{theorem}
+{\bf comments}
+we would like a pruning conjecture like the one below,
+but the problem is that capturing stones makes comparison
+of associated state pairs (one from the inferior move strategy,
+the other from the superior) messy ...
+
+\begin{itemize}
+\item
+does the proof hold if we insist the 1st 3 cells (not just the 1st 2)
+are empty?  not sure \ldots
+problem is when the superior move (to cell 2) captures opponent stones
+\item maybe the idea of the proof is not the best: now
+I'm wondering whether we should compare the inferior move strat
+to the strat where opponent replies to cell 2 and kills it,
+and then player still wins ... several cases to consider,
+but maybe this is the best approach
+\item new conjecture: if x creates the following fresh prefix
+state,
+then x has a 2nd player strategy that preserves the prefix
+($+$ indicates string repeated $k\geq 1$ times
+\item
+similar conjecture:
+what about the following pattern? tricky, or maybe not true
+( [ ] indicates 0 or 1 time )
+\end{itemize}
+
+\begin{verbatim}
+- { { x }+ - }+ sigma
+
+- { x }+ { [ - ] - { x }+ }* - sigma
+\end{verbatim}
+
+\begin{conjecture}
 Let $S^0 =(\mP,z)$ be a go state in which the current position
 $P_j$ has cell 0 $x$ and cell 1 empty.
 Let $\mP' = \phi(0,1,\mP)$, and let
 $S^1 = (\mP',z)$ be a valid go state, ie.\ the sequence
 of positions in $S_1$ corresponds to a sequence of legal moves.
 Then $\mu_x(S^0) \leq \mu_x(S^1)$.
-\end{theorem}
+\end{conjecture}
 
 We will sometimes represent positions pictorially:
 eg.\ ({\tt x - }$\rho$) is a position with cell 0 x, cell 1 empty,
