@@ -1,0 +1,128 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 0 0 90.0 70.0
+%%Pages: 0
+%%EndComments
+/OriginX 0 def
+/OriginY 0 def
+/Rows 3 def
+/Cols 4 def
+/CellDiameter  20
+1 setlinejoin   % use round join when lines meet at a point
+/StoneRadius    8 def
+/LineWidth      0.1 def 
+/PerimeterWidth 0.2 def 
+/CellDiameter  20   def 
+/BoardShade .9 def
+/CoordinatesShade .2 def
+/TextHeight 8 def
+/TextWidth TextHeight 0.45 mul def
+/Chars {[(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)(m)
+  (n)(o)(p)(q)(r)(s)(t)(u)(v)(w)(x)(y)(z)]} def
+/Digits {[(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)(11)(12)(13)
+  (14)(15)(16)(17)(18)(19)(20)(21)(22)(23)(24)(25)(26)]} def
+
+/ScalePair { % stack: ... x y size ==> ...  x*size y*size
+   3 dict begin /size exch def /y exch def /x exch def
+   x size mul           y size mul
+end } def
+
+/FillAndStroke { 2 dict begin /sh exch def /wdth exch def
+    gsave sh setgray fill
+    grestore 0 setgray wdth setlinewidth stroke
+end } def
+
+/GoPoint { CellDiameter ScalePair } def
+
+/DrawGoBoard { 2 dict begin
+    gsave
+    newpath .5 .5 GoPoint moveto
+    0    Rows     GoPoint rlineto
+    Cols 0        GoPoint rlineto
+    0    Rows neg GoPoint rlineto
+    closepath PerimeterWidth BoardShade FillAndStroke
+    LineWidth setlinewidth
+    1 1 Cols { /y exch def  % if only 1 Row, then nonzero length
+      Rows 1 eq { newpath y .9 GoPoint moveto 
+                  0 Rows .8 sub GoPoint rlineto stroke } {
+                  newpath y 1 GoPoint moveto 
+                  0 Rows 1 sub GoPoint rlineto stroke
+      } ifelse
+    } for
+    1 1 Rows { /x exch def  % if only 1 Col, then nonzero length
+      Cols 1 eq { newpath .9 x GoPoint moveto 
+                  Cols .8 sub 0 GoPoint rlineto stroke } {
+                  newpath 1 x GoPoint moveto 
+                  Cols 1 sub 0 GoPoint rlineto stroke
+      } ifelse
+    } for
+    grestore
+end } def
+
+/Coordinates { 2 dict begin
+    false true FontSelect CoordinatesShade setgray
+    1 1 Rows { /j exch def
+      0 .3 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
+    } for
+    1 1 Cols { /i exch def
+  i Rows .7 add Chars i 1 sub get 1 LabelString
+    } for
+end } def
+
+/GoStone { 3 dict begin /shade exch def /j exch def /i exch def
+    newpath
+    i j GoPoint StoneRadius 0 360 arc
+    LineWidth shade FillAndStroke
+end } def
+
+/LabelString {   % call: i j (str) strlen LabelString
+    6 dict begin /strlen exch def /str exch def /j exch def /i exch def
+    newpath
+    i j GoPoint /y exch def /x exch def
+    x y moveto
+    TextWidth strlen mul 0.5 mul neg TextHeight 0.33 mul neg rmoveto
+    str show
+end } def
+
+/LabelStringVerb { % i j (str) strlen shade bold italic LabelStringVerb
+    7 dict begin /italic exch def /bold exch def /shade exch def
+    /strlen exch def /str exch def /j exch def /i exch def
+    bold italic FontSelect shade setgray
+    i j str strlen LabelString
+end } def
+
+/GoStoneLabelled { % i j (str) strlen clr
+    5 dict begin /clr exch def /strlen exch def /str exch def /j exch def /i exch def
+    i j clr GoStone
+    i j str strlen 1.0 clr sub true true LabelStringVerb
+end } def
+
+/FontSelect { % bold italic FontSelect
+    2 dict begin /italic exch def /bold exch def
+    bold {
+        italic
+        { /Times-BoldItalic findfont TextHeight scalefont setfont }
+        { /Times-Bold findfont TextHeight scalefont setfont }
+        ifelse}
+        {
+        italic {/Times-Italic findfont TextHeight scalefont setfont}
+        { /Times findfont TextHeight scalefont setfont }
+        ifelse}
+    ifelse
+end } def
+
+/W { 1.0 GoStone } def
+/B { 0.0 GoStone } def
+/WL {1.0 GoStoneLabelled } def
+/BL {0.0 GoStoneLabelled } def
+
+-.4 -.4 GoPoint translate
+DrawGoBoard
+false true Coordinates
+1 2 B
+2 3 B
+2 2 W
+2 1 B
+3 3 W
+3 1 W
+4 2 W
+showpage
