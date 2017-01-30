@@ -3,3 +3,4 @@
 *.dvi
 *.pdf
 *.ps
+pix/*.eps
