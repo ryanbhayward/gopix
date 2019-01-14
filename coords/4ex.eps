@@ -8,13 +8,13 @@
 /Cols 5 def
 /CellDiameter  20
 1 setlinejoin   % use round join when lines meet at a point
-/StoneRadius    8 def
+/StoneRadius    9 def
 /LineWidth      0.1 def 
 /PerimeterWidth 0.2 def 
 /CellDiameter  20   def 
 /BoardShade .9 def
 /CoordinatesShade .2 def
-/TextHeight 8 def
+/TextHeight 10 def
 /TextWidth TextHeight 0.45 mul def
 /Chars {[(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)(m)
   (n)(o)(p)(q)(r)(s)(t)(u)(v)(w)(x)(y)(z)]} def
@@ -61,10 +61,10 @@ end } def
 /Coordinates { 2 dict begin
     false true FontSelect CoordinatesShade setgray
     1 1 Rows { /j exch def
-      0 .3 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
+      0 .2 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
     } for
     1 1 Cols { /i exch def
-  i Rows .7 add Chars i 1 sub get 1 LabelString
+  i 1 .8 sub Chars i 1 sub get 1 LabelString
     } for
 end } def
 
