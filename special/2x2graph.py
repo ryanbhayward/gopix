@@ -1,3 +1,4 @@
+import math
 #  create eps with all 57 legal 2x2 Go positions well-placed 
 #    for transition graph (adjacent iff legal move from one to other)
 #  using cyclic board indices   1  2 
@@ -31,24 +32,43 @@ def emit(x,y,L,j):
 
 def printHead():
   print('%!PS-Adobe-3.0')
-  print('%%BoundingBox: 0 80 280 470')
+  print('%%BoundingBox: -160 -160 230 230')
   print('%%Pages: 0')
   print('%%EndComments')
 
 def printBody():
   f = open('2x2nodes.epsbody','r')
-  for line in f: print(line)
+  for line in f: print(line, end = '')
 
 def printTail():
   f = open('2x2nodes.epsbody','r')
   for line in f: print(line)
 
 def printTail():
-  emit(0,0,nodes,0)
-  for j in range(1,len(nodes)):
-    emit((j+7)%8, (j+7)//8, nodes, j)
+  def do_ring(ring, radius):
+    for j in range(len(ring)):
+      emit(str.format('{0:.3f}',radius*math.sin(math.pi*2*j/len(ring))), 
+           str.format('{0:.3f}',radius*math.cos(math.pi*2*j/len(ring))), 
+         nodes, 
+         ring[j])
+
+  ring1 = [ 1, 29, 7, 21,  2, 30,  8, 23,  3, 31,  5, 24,  4, 32,  6, 21]
+  ring2 = [18, 15, 9, 28, 19, 21, 10, 25, 20, 16, 11, 26, 17, 20, 12, 27]
+  print('gsave')
+  emit( 0, 0, nodes,0)
+  do_ring(ring1, 3.0)
+  do_ring(ring2, 5.0)
+  #for j in range(len(ring1)):
+  #  emit(str.format('{0:.3f}',3.0*math.sin(math.pi*2*j/len(ring1))), 
+  #       str.format('{0:.3f}',3.0*math.cos(math.pi*2*j/len(ring1))), 
+  #       nodes, 
+  #       ring1[j])
+  #for j in range(1,len(nodes)):
+  #  emit((j+7)%8, (j+7)//8, nodes, j)
+  print('grestore')
   print('showpage')
 
 printHead()
 printBody()
 printTail()
+
