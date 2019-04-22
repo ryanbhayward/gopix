@@ -35,14 +35,12 @@ end } def
     closepath PerimeterWidth BoardShade FillAndStroke
     LineWidth setlinewidth
     1 1 Cols { /y exch def  % if more than 1 Row ...
-      Rows 1 gt { newpath y 0 GoPoint moveto
-                  0 Rows GoPoint rlineto stroke
-      } if
+      Cols 1 gt { newpath y 0 GoPoint moveto
+                  0 Rows GoPoint rlineto stroke } if
     } for
     1 1 Rows { /x exch def  % if more than 1 Col ...
-      Cols 1 gt { newpath 0 x GoPoint moveto
-                  Cols 0 GoPoint rlineto stroke
-      } if
+      Rows 1 gt { newpath 0 x GoPoint moveto 
+                  Cols 0 GoPoint rlineto stroke } if
     } for
     grestore
 end } def
