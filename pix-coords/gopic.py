@@ -19,7 +19,7 @@ def printHead(rows, cols):
   print '/CellDiameter ', 2*CellRadius
 
 def printBody():
-  f = open('gopic.epsbody','r')
+  f = open('go-body.eps','r')
   for line in f: print line,
 
 def printTail(L,rows,cols):

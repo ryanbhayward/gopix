@@ -1,3 +1,5 @@
-For Terni Lapilli --- 3-pebble tic-tac-toe,
-  added
-  AddDiagonals to DrawGoBoard
+For Terni Lapilli     (3-pebble tic-tac-toe)
+
+* modified go-body.eps by adding AddDiagonals to DrawGoBoard
+* for unlabelled diagram, by hand, comment out 
+      coordinate label request (2nd last line)

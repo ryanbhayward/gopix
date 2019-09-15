@@ -6,6 +6,11 @@
 /BoardShade .9 def
 /TextHeight 8 def
 /TextWidth TextHeight 0.45 mul def
+/CoordinatesShade .2 def
+/Chars {[(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)(m)
+  (n)(o)(p)(q)(r)(s)(t)(u)(v)(w)(x)(y)(z)]} def
+/Digits {[(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)(11)(12)(13)
+  (14)(15)(16)(17)(18)(19)(20)(21)(22)(23)(24)(25)(26)]} def
 
 /ScalePair { % stack: ... x y size ==> ...  x*size y*size
    3 dict begin /size exch def /y exch def /x exch def
@@ -28,6 +33,16 @@ end } def
   3 1 GoPoint lineto stroke
   grestore
 } def
+
+/Coordinates { 2 dict begin
+    false true FontSelect CoordinatesShade setgray
+    1 1 Rows { /j exch def
+      0 .2 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
+    } for
+    1 1 Cols { /i exch def
+  i 1 .8 sub Chars i 1 sub get 1 LabelString
+    } for
+end } def
 
 /DrawGoBoard { 2 dict begin
     gsave
@@ -104,3 +119,4 @@ end } def
 
 -.5 -.5 GoPoint translate
 DrawGoBoard
+false true Coordinates
