@@ -1,0 +1,106 @@
+1 setlinejoin   % use round join when lines meet at a point
+/StoneRadius    6   def 
+/LineWidth      0.1 def 
+/PerimeterWidth 0.2 def 
+/CellDiameter  20   def 
+/BoardShade .9 def
+/TextHeight 8 def
+/TextWidth TextHeight 0.45 mul def
+
+/ScalePair { % stack: ... x y size ==> ...  x*size y*size
+   3 dict begin /size exch def /y exch def /x exch def
+   x size mul           y size mul
+end } def
+
+/FillAndStroke { 2 dict begin /sh exch def /wdth exch def
+    gsave sh setgray fill
+    grestore 0 setgray wdth setlinewidth stroke
+end } def
+
+/GoPoint { CellDiameter ScalePair } def
+
+/AddDiagonals { % for Terni Lapilli : 3 pebble tic-tac-toe
+  gsave
+  LineWidth setlinewidth
+  newpath 1 1 GoPoint moveto
+  3 3 GoPoint lineto stroke
+  newpath 1 3 GoPoint moveto
+  3 1 GoPoint lineto stroke
+  grestore
+} def
+
+/DrawGoBoard { 2 dict begin
+    gsave
+    newpath .5 .5 GoPoint moveto
+    0    Rows     GoPoint rlineto
+    Cols 0        GoPoint rlineto
+    0    Rows neg GoPoint rlineto
+    closepath PerimeterWidth BoardShade FillAndStroke
+    LineWidth setlinewidth
+    1 1 Cols { /y exch def  % if only 1 Row, then nonzero length
+      Rows 1 eq { newpath y .9 GoPoint moveto 
+                  0 Rows .8 sub GoPoint rlineto stroke } {
+                  newpath y 1 GoPoint moveto 
+                  0 Rows 1 sub GoPoint rlineto stroke
+      } ifelse
+    } for
+    1 1 Rows { /x exch def  % if only 1 Col, then nonzero length
+      Cols 1 eq { newpath .9 x GoPoint moveto 
+                  Cols .8 sub 0 GoPoint rlineto stroke } {
+                  newpath 1 x GoPoint moveto 
+                  Cols 1 sub 0 GoPoint rlineto stroke
+      } ifelse
+    } for
+    grestore
+    AddDiagonals
+end } def
+
+/GoStone { 3 dict begin /shade exch def /j exch def /i exch def
+    newpath
+    i j GoPoint StoneRadius 0 360 arc
+    LineWidth shade FillAndStroke
+end } def
+
+/LabelString {   % call: i j (str) strlen LabelString
+    6 dict begin /strlen exch def /str exch def /j exch def /i exch def
+    newpath
+    i j GoPoint /y exch def /x exch def
+    x y moveto
+    TextWidth strlen mul 0.5 mul neg TextHeight 0.33 mul neg rmoveto
+    str show
+end } def
+
+/LabelStringVerb { % i j (str) strlen shade bold italic LabelStringVerb
+    7 dict begin /italic exch def /bold exch def /shade exch def
+    /strlen exch def /str exch def /j exch def /i exch def
+    bold italic FontSelect shade setgray
+    i j str strlen LabelString
+end } def
+
+/GoStoneLabelled { % i j (str) strlen clr
+    5 dict begin /clr exch def /strlen exch def /str exch def /j exch def /i exch def
+    i j clr GoStone
+    i j str strlen 1.0 clr sub true true LabelStringVerb
+end } def
+
+/FontSelect { % bold italic FontSelect
+    2 dict begin /italic exch def /bold exch def
+    bold {
+        italic
+        { /Times-BoldItalic findfont TextHeight scalefont setfont }
+        { /Times-Bold findfont TextHeight scalefont setfont }
+        ifelse}
+        {
+        italic {/Times-Italic findfont TextHeight scalefont setfont}
+        { /Times findfont TextHeight scalefont setfont }
+        ifelse}
+    ifelse
+end } def
+
+/W { 1.0 GoStone } def
+/B { 0.0 GoStone } def
+/WL {1.0 GoStoneLabelled } def
+/BL {0.0 GoStoneLabelled } def
+
+-.5 -.5 GoPoint translate
+DrawGoBoard
