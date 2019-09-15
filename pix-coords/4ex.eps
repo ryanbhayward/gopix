@@ -59,7 +59,7 @@ end } def
 end } def
 
 /Coordinates { 2 dict begin
-    false true FontSelect CoordinatesShade setgray
+    false false FontSelect CoordinatesShade setgray
     1 1 Rows { /j exch def
       0 .2 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
     } for
@@ -93,19 +93,19 @@ end } def
 /GoStoneLabelled { % i j (str) strlen clr
     5 dict begin /clr exch def /strlen exch def /str exch def /j exch def /i exch def
     i j clr GoStone
-    i j str strlen 1.0 clr sub true true LabelStringVerb
+    i j str strlen 1.0 clr sub false false LabelStringVerb
 end } def
 
 /FontSelect { % bold italic FontSelect
     2 dict begin /italic exch def /bold exch def
     bold {
         italic
-        { /Times-BoldItalic findfont TextHeight scalefont setfont }
-        { /Times-Bold findfont TextHeight scalefont setfont }
+        { /Courier-BoldItalic findfont TextHeight scalefont setfont }
+        { /Courier-Bold findfont TextHeight scalefont setfont }
         ifelse}
         {
-        italic {/Times-Italic findfont TextHeight scalefont setfont}
-        { /Times findfont TextHeight scalefont setfont }
+        italic {/Courier-Italic findfont TextHeight scalefont setfont}
+        { /Courier findfont TextHeight scalefont setfont }
         ifelse}
     ifelse
 end } def
@@ -117,7 +117,7 @@ end } def
 
 -.4 -.4 GoPoint translate
 DrawGoBoard
-false true Coordinates
+Coordinates
 1 2 W
 2 4 B
 2 3 B
