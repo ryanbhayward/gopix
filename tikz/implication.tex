@@ -7,7 +7,7 @@
 \newcommand{\vertex}{\node[vertex]}
 \newcounter{Angle}
 
-\pagestyle{plain}
+\pagestyle{empty}
 \begin{document}
 {%\large\bf
 \[\begin{tikzpicture}[x=1.5cm, y=1.5cm
@@ -32,6 +32,33 @@
 \end{tikzpicture}\]
 \vfill
 
+\[\begin{tikzpicture}[x=1.5cm, y=1.5cm
+    ,every edge/.style={
+        draw,
+        postaction={decorate,
+                    decoration={markings,mark=at position .6 with
+		    {\arrow[line width=2pt,black]{latex}}} } }
+]
+\vertex (a) at (0,1)  {6};
+\vertex (b) at (1,2) {-5};
+\vertex (c) at (1,0) {-7};
+\vertex (d) at (2,1)  {8};
+\vertex (e) at (3,2) {-4};
+\vertex (f) at (3,0)  {4};
+\vertex (g) at (4,1) {-8};
+\vertex (h) at (5,2)  {7};
+\vertex (i) at (5,0)  {5};
+\vertex (j) at (6,1) {-6};
+\vertex (A) at (-2,1) {-1};
+\vertex (B) at (-1,2) {-2};
+\vertex (C) at (-1,0)  {3};
+\vertex (D) at (8,1) {1};
+\vertex (E) at (7,0) {2};
+\vertex (F) at (7,2) {-3};
+\end{tikzpicture}\]
+\vfill
+
+\newpage
 \[\begin{tikzpicture}[x=1.5cm, y=1.5cm
     ,every edge/.style={
         draw,
