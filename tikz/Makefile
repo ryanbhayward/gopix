@@ -1,6 +1,6 @@
 LATEX = latex
 DVIPS = dvips -Ppdf -t letter
-PPR = implication
+PPR = net
 
 pdf: clean full good ps 
 	ps2pdf $(PPR).ps
