@@ -1,5 +1,5 @@
 1 setlinejoin   % use round join when lines meet at a point
-/StoneRadius    6   def 
+/StoneRadius    8   def 
 /LineWidth      0.1 def 
 /PerimeterWidth 0.2 def 
 /CellDiameter  20   def 
@@ -69,7 +69,7 @@ end } def
 /GoStoneLabelled { % i j (str) strlen clr
     5 dict begin /clr exch def /strlen exch def /str exch def /j exch def /i exch def
     i j clr GoStone
-    i j str strlen 1.0 clr sub true true LabelStringVerb
+    i j str strlen 1.0 clr sub false false LabelStringVerb
 end } def
 
 /FontSelect { % bold italic FontSelect

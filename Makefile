@@ -1,7 +1,6 @@
 LATEX = latex
 DVIPS = dvips -Ppdf -t letter
-PPR = 8brd
-PPR = 3peb
+PPR = chckrbrd
 
 pdf: clean full good ps 
 	ps2pdf $(PPR).ps
