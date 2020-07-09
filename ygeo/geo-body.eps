@@ -1,0 +1,66 @@
+/NodeRadius 1.5 def
+/StoneRadius .55 Scale mul def
+/DotRadius .13 Scale mul def
+/LineWidth 0.1 def
+/EdgeThin 0.05 def
+/TextHeight StoneRadius 1.4 mul def
+/TextWidth TextHeight 0.45 mul def
+/Fillgray .9 def
+/R3d2 .86602540378 def
+
+1 setlinejoin
+0 setgray 
+
+/FontSelect { % bold italic FontSelect
+    2 dict begin /italic exch def /bold exch def
+    bold {
+        italic
+        { /Courier-BoldItalic findfont TextHeight scalefont setfont }
+        { /Courier-Bold findfont TextHeight scalefont setfont }
+        ifelse}
+        {
+        italic {/Courier-Italic findfont TextHeight scalefont setfont}
+        { /Courier findfont TextHeight scalefont setfont }
+        ifelse}
+    ifelse
+end } def
+
+/FillAndStroke { 2 dict begin /sh exch def /wdth exch def
+  gsave sh setgray fill
+  grestore 0 setgray wdth setlinewidth stroke
+end } def
+
+/ShowNodes { 1 dict begin /nds exch def
+  0 setgray nds { /ary exch def
+    newpath ary 0 get ary 1 get NodeRadius 0 360 arc fill
+  } forall
+} def
+
+/ShowEdges {2 dict begin /edgs exch def /nds exch def
+  edgs { /thisedge exch def
+    /thisnode thisedge 0 get def
+    nds thisnode get 0 get nds thisnode get 1 get 
+    newpath moveto
+    /thisnode thisedge 1 get def
+    nds thisnode get 0 get nds thisnode get 1 get
+    lineto stroke
+  } forall
+} def
+
+/BoardPerimFill { 3 dict begin /gry exch def /wd exch def /dia exch def
+  % arc adds line to previous point, so order of commands matters
+  gsave newpath
+  0 dia
+  R3d2 dia mul 2.0 mul 240 300 arc
+  R3d2 dia -1.0 mul mul -.5 dia mul
+  R3d2 dia mul 2.0 mul 0 60 arc
+  R3d2 dia mul -.5 dia mul
+  R3d2 dia mul 2 mul 120 180 arc closepath
+  wd gry FillAndStroke
+  grestore
+end } def
+
+/GoToCenter { 2 dict begin /cell exch def /nds exch def
+  newpath nds cell get 0 get nds cell get 1 get
+end } def
+

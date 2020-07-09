@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # convert Go diagram to .eps file
 import sys
 CellRadius    = 10 
