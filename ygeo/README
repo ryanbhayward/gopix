@@ -1,26 +1,72 @@
-start with handcrafted postscript drawing of 2geo
+RBH 2020, based on Hex-board drawing programs by Cameron Browne,
+ and a perl generation program by Jack van Rijswijck.
+-----------
+TODO
 
+* generate larger boards.
+  you could probably figure out how to do base-6 by hand,
+  but better would be to use the next idea
 
-centers
-1geo
-            a1
-         c1    b1
+* automate the generation of cell corners (and cell perimeter-corner-sets).
+  currently I use center centroids, but this is ad hoc and not automated.
+  Either use geometry to define corner x-y coordinates,
+  or automatically generate the Voronoi diagram (this code must be out there).
+  If you use geometry, first step
+  is to automatically generate these sets for the current board,
+  one approach to this is to redefine corners of the board's perimeter
+  to include all the corners that will be corners of the larger board
+  (currently some of these are not corners when on the perimeter,
+   this makes the code a bit confusing.
+   better would be to include them all, but just
+   be aware of that when generating corner edges)
+
+*  currently when showing a game in progress, I put a stone (filled circle)
+   in a cell.  more elegant would be to color the cell.
+   you will need 4 grayscale shades, with these approximate postscript values:
+
+    0    black, for B-stones
+     .6  dark grey, for edges on the original board
+     .85 light grey, to indicate empty cells
+    1    white, for W-stones 
+
+   this will look cool :)
+
+* generate other Schensted board families, that use different cell patterns,
+  see the googleref for images of the base-9 tournament schensted board
+
+https://sites.google.com/site/boardandpieces/list-of-games/y
+https://sites.google.com/site/boardandpieces/list-of-games/hex
+
+END TODO
+------------
+
+This code generates postscript image files (.eps)
+for the family of geodesic-Y boards based on the
+board by Schensted which has 5 cells on its base.
+
+Currently this code generates figures with any base from 2 to 5.
+
+There are some ugly things that could be automated that would
+allow generation of larger base boards in this family.
+
+----------
+There are two styles of board
+* normal style, where each cell is drawn as a polygon, 
+  defined by the corners of the perimeter
+
+* dual style (that's a term from graph theory),
+  where each cell is represented as a node (dot),
+  and each adjacent cell is joine by an edge (line).
+
+---------
+centers for smaller boards:
+base 2
+            0
+          2   1
       
-2geo 
+base 3
+        3
+    8   0   4
+      2   1
+   7    6    5
 
-         a1
-    f1   a2  b1
-      e2    c2
-   e1    d1    c1
-
-3geo centers
-         a1  
-
-         a2   .
-
-         a3
-      g3     d3     .
-
-    g2            d2
-
- g1                    d1
