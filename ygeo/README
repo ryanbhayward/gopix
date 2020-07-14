@@ -1,5 +1,15 @@
 RBH 2020, based on Hex-board drawing programs by Cameron Browne,
  and a perl generation program by Jack van Rijswijck.
+__________
+usage:
+  first, modify any *.geo files you want to generate in autopix
+  then ...
+
+  in autopix, execute:
+    ./make.sh
+  in this direct, execute:
+    make geo
+
 -----------
 TODO
 
