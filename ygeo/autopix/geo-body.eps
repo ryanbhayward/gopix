@@ -64,3 +64,38 @@ end } def
   newpath nds cell get 0 get nds cell get 1 get
 end } def
 
+/arrowdict 14 dict def
+arrowdict begin
+  /mtrx matrix def
+end
+
+/arrow { arrowdict begin
+  /headlength exch def
+  /halfheadthickness exch 2 div def
+  /halfthickness exch 2 div def
+  /tipy exch def /tipx exch def
+  /taily exch def /tailx exch def
+
+  /dx tipx tailx sub def
+  /dy tipy taily sub def
+  /arrowlength dx dx mul dy dy mul add sqrt def
+  /angle dy dx atan def
+  /base arrowlength headlength sub def
+  /savematrix mtrx currentmatrix def
+
+  tailx taily translate angle rotate
+  0 halfthickness neg moveto
+  base halfthickness neg lineto
+  base halfheadthickness neg lineto arrowlength 0 lineto
+  base halfheadthickness lineto base halfthickness lineto
+  0 halfthickness lineto
+  closepath
+  savematrix setmatrix end
+} def
+
+/MyArc { 3 dict begin /cy exch def /cx exch def /ary exch def
+  gsave 0 setgray newpath
+  ary cx get 0 get ary cx get 1 get
+  ary cy get 0 get ary cy get 1 get
+  1 4 5 arrow fill grestore
+end } def
