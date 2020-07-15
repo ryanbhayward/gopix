@@ -99,3 +99,12 @@ end
   ary cy get 0 get ary cy get 1 get
   1 4 5 arrow fill grestore
 end } def
+
+/FillPoly { 2 dict begin /sh exch def /cell exch def
+  gsave newpath Corners Polygons cell get 0 get GoToPoint moveto
+  Polygons cell get {/j exch def
+    Corners j get 0 get Corners j get 1 get lineto
+    } forall
+  sh setgray fill
+end } def
+
