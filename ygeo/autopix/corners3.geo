@@ -19,3 +19,6 @@
 16  (16) 2 LabelString
 17  (17) 2 LabelString
 18  (18) 2 LabelString
+19  (19) 2 LabelString
+20  (20) 2 LabelString
+21  (21) 2 LabelString

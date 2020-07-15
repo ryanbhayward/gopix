@@ -67,10 +67,10 @@ def cellCenters(b, s, stch): # nodes in geo base b board, scale s, stretch
   return N
 
 # this would be a better way to do things, maybe later
-def cellCorners(b, s, stch):
-  R = [(0.0, 0.0)]
-  R += geoLayer(b, s*layerRadius(2,.67*stch))
-  return R
+#def cellCorners(b, s, stch):
+#  R = [(0.0, 0.0)]
+#  R += geoLayer(b, s*layerRadius(2,.67*stch))
+#  return R
 
 def pretty(C, n):
   for k in range(n):
@@ -135,19 +135,19 @@ CorEd = (  # corner edges form cell boundaries
 
 PerimEd = (     # edges to perimeter nodes
   ((0,2),(0,4),(0,6)), # when base is 2, perimeter nodes 1-6
-  ((1,11),(3,12),(4,14),(6,15),(7,17),(9,18)), #base 3, p-nodes 10-18
-  ((10,26),(12,27),(14,28),(15,30),(17,31),(19,32),(20,34),
-   (22,35),(24,36)), #base 4, p-nodes 25-36
-  ((25,47),(27,48),(29,49),(31,50),(32,52),(34,53),(36,54),(38,55),
-   (39,57),(41,58),(43,59),(45,60))) #base 5, p-nodes 46-60
+  ((1,11),(3,13),(4,15),(6,17),(7,19),(9,21)), #base 3, p-nodes 10-21
+  ((10,26),(12,28),(14,30),(15,32),(17,34),(19,36),(20,38),
+   (22,40),(24,42)), #base 4, p-nodes 25-36
+  ((25,47),(27,49),(29,51),(31,53),(32,55),(34,57),(36,59),(38,61),
+   (39,63),(41,65),(43,67),(45,69))) #base 5, p-nodes 46-60
 
 # REPEATING SOME CORNERS TO MAKE CENTROID MORE CENTRAL
 CellCors = [ # corners of each cell
-  [ (0,1,2,6), (0,2,3,4), (0,4,5,6) ],
-  [(0,1,2,8,9),(0,2,3,4,5),(0,5,6,7,8),(1,9,10,11,18),(1,2,3,11,11,12,12),
-   (3,4,12,13,14),(4,5,6,14,14,15,15),(6,7,15,16,17),(7,8,9,17,17,18,18)],
+  [ (0,1,2,6), (0,2,3,4), (0,4,5,6) ],   # base 2
+  [(0,2,1,9,8),(0,2,3,4,5),(0,5,6,7,8),(1,9,21,10,11),(1,2,3,13,12,11), #base 3
+   (3,4,13,14,15),(4,5,6,17,16,15),(6,7,19,18,17),(7,8,9,21,20,19)],
   #[(0,1,2,8,9),(0,2,3,4,5),(0,5,6,7,8),
-  [(0,0,1,9),(0,0,3,4),(0,0,6,7),
+  [(0,0,1,9),(0,0,3,4),(0,0,6,7),        #base 4
    #(1,9,10,10,11,23,24,24),(1,2,3,11,12,12,13),(3,4,13,14,14,15,15,16),
    (1,9,10,24),(2,12),(3,4,14,15),
    # (4,5,6,16,17,17,18),(6,7,18,19,19,20,20,21),(7,8,9,21,22,22,23),
@@ -158,7 +158,7 @@ CellCors = [ # corners of each cell
    (14,14,15,15,29,29,29),(16,16,16,30,30,31,31),(18,18,18,31,31,32,32),
    (19,19,20,20,33,33,33),(21,21,21,34,34,35,35),(23,23,23,35,35,36,36)],
   #[(0,1,2,8,9),(0,2,3,4,5),(0,5,6,7,8),
-  [(0,0,1,9),(0,0,3,4),(0,0,6,7),
+  [(0,0,1,9),(0,0,3,4),(0,0,6,7),     #base 5
    #(1,9,10,11,23,24),(1,2,3,11,12,13),(3,4,13,14,15,16),
    (1,9,10,24),(2,12),(3,4,14,15),
    #(4,5,6,16,17,17,18),(6,7,18,19,19,20,20,21),(7,8,9,21,22,22,23),
@@ -235,16 +235,21 @@ def setCorners(C, b):
     corners.append(meetpoint(C, t))
   if b==2:
     outerlayer = geoLayer(b, scale*layerRadius(b-.5,stretch))
-    Select = [0,1,2,3,4,5]
+    Select = [j for j in range(6)]
   elif b==3:
     outerlayer = geoLayer(b+1,scale*layerRadius(b-.5,stretch) )
-    Select = [0,1, 3,4,5, 7,8,9, 11]
+    #Select = [0,1, 3,4,5, 7,8,9, 11]
+    Select = [j for j in range(12)]
   elif b==4:
     outerlayer = geoLayer(b+2,scale*layerRadius(b-.5,stretch) )
-    Select = [0,1, 3,  5,6,7, 9, 11,12,13, 15, 17]
+    #Select = [0,1, 3,  5,6,7, 9, 11,12,13, 15, 17]
+    Select = [j for j in range(18)]
   elif b==5:
     outerlayer = geoLayer(b+3,scale*layerRadius(b-.5,stretch) )
-    Select = [0,1, 3,  5, 7,8,9, 11, 13, 15,16,17, 19, 21, 23]
+    #Select = [0,1, 3,  5, 7,8,9, 11, 13, 15,16,17, 19, 21, 23]
+    Select = [j for j in range(24)]
+  for j in range(len(Select)):
+    corners.append(outerlayer[Select[j]])
   for j in range(len(Select)):
     corners.append(outerlayer[Select[j]])
   return corners
@@ -279,7 +284,7 @@ def printData():
   #print('] def')
   Centers = cellCenters(base, scale, stretch)
   Corners = setCorners(Centers,base)
-  #emitNodes(Centers,'Centers',len(Centers))
+  emitNodes(Centers,'Centers',len(Centers))
   NewCenters = setNewCenters(base, Corners)
   emitNodes(NewCenters,'NewCenters',len(NewCenters))
   emitNodes(Corners,'Corners',len(Corners))
