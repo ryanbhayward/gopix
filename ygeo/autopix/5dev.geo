@@ -1,0 +1,32 @@
+base 5
+
+ 0 .7 FillPoly
+ 1 .7 FillPoly
+ 2 .7 FillPoly
+ 3 .3 FillPoly
+ 4 .7 FillPoly
+ 5 .3 FillPoly
+ 6 .7 FillPoly
+ 7 .3 FillPoly
+ 8 .7 FillPoly
+ 9 .3 FillPoly
+10 .7 FillPoly
+11 .7 FillPoly
+12 .3 FillPoly
+13 .7 FillPoly
+14 .7 FillPoly
+15 .7 FillPoly
+16 .7 FillPoly
+17 .7 FillPoly
+18 .7 FillPoly
+19 .7 FillPoly
+20 .7 FillPoly
+21 .7 FillPoly
+22 .7 FillPoly
+23 .7 FillPoly
+24 .7 FillPoly
+25 .7 FillPoly
+26 .7 FillPoly
+27 .7 FillPoly
+28 .7 FillPoly
+29 .7 FillPoly
