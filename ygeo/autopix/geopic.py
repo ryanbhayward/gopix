@@ -107,7 +107,7 @@ Poly3 = [        # for each cell, the corners of its boundary
   [1,2,3,12,11],
   [3,4,14,13,12],
   [4,5,6,15,14],
-  [6,7,17,16,16],
+  [6,7,17,16,15],
   [7,8,9,18,17]]
 
 def setDualEdges(b):
@@ -302,6 +302,7 @@ def printTail(maxx, L):
   print('false false FontSelect')
   for instr in L:
     print(instr, end='')
+  print(maxx, '3 0 BoardPerimOnly')
 
 printHead(mmx[0], mmx[1], mmx[2], mmx[3])
 printBody()

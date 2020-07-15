@@ -47,6 +47,19 @@ end } def
   } forall
 } def
 
+/BoardPerimOnly { 3 dict begin /gry exch def /wd exch def /dia exch def
+  % arc adds line to previous point, so order of commands matters
+  gsave newpath
+  0 dia
+  R3d2 dia mul 2.0 mul 240 300 arc
+  R3d2 dia -1.0 mul mul -.5 dia mul
+  R3d2 dia mul 2.0 mul 0 60 arc
+  R3d2 dia mul -.5 dia mul
+  R3d2 dia mul 2 mul 120 180 arc closepath
+  gry setgray wd setlinewidth stroke
+  grestore
+end } def
+
 /BoardPerimFill { 3 dict begin /gry exch def /wd exch def /dia exch def
   % arc adds line to previous point, so order of commands matters
   gsave newpath
