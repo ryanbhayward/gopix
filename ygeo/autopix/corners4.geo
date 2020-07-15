@@ -1,5 +1,5 @@
- base 5
-/Where NewCenters def
+ base 4
+/Where Corners def
  0  (0) 1 LabelString
  1  (1) 1 LabelString
  2  (2) 1 LabelString
@@ -30,3 +30,10 @@
 27 (27) 2 LabelString
 28 (28) 2 LabelString
 29 (29) 2 LabelString
+30 (30) 2 LabelString
+31 (31) 2 LabelString
+32 (32) 2 LabelString
+33 (33) 2 LabelString
+34 (34) 2 LabelString
+35 (35) 2 LabelString
+36 (36) 2 LabelString

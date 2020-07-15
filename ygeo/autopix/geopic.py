@@ -302,7 +302,7 @@ def printTail(maxx, L):
   print('false false FontSelect')
   for instr in L:
     print(instr, end='')
-  print(maxx, '3 0 BoardPerimOnly')
+  #print(maxx, '3 0 BoardPerimOnly')
 
 printHead(mmx[0], mmx[1], mmx[2], mmx[3])
 printBody()
