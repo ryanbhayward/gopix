@@ -1,16 +1,14 @@
 base 4
 
-gsave
-newpath Corners 0 GoToPoint moveto
-[8 9 1 2] {/j exch def
-  Corners j get 0 get Corners j get 1 get lineto
-  } forall
-.3 setgray fill
-newpath Corners 0 GoToPoint moveto
-[2 3 4 5] {/j exch def
-  Corners j get 0 get Corners j get 1 get lineto
-  } forall
-1 setgray fill
-grestore
-
-NewCenters 0 1 MyArc
+ 0 .3 FillPoly
+ 1 .7 FillPoly
+ 3 .3 FillPoly
+ 4 .7 FillPoly
+ 5 .3 FillPoly
+ 6 .7 FillPoly
+ 7 .3 FillPoly
+ 8 .7 FillPoly
+ 9 .3 FillPoly
+11 .7 FillPoly
+12 .3 FillPoly
+14 .7 FillPoly

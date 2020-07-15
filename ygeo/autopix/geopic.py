@@ -99,16 +99,18 @@ Trips = [
    [15,25,26],[15,26,27],[15,16,27],[16,27,28],[16,17,28],[17,28,29],
    [9,17,29],[9,18,29]]] #layer 4
 
-Poly3 = [        # for each cell, the corners of its boundary
-  [0,8,9,1,2],
-  [0,2,3,4,5],
-  [0,5,6,7,8],
-  [1,9,18,10,11],
-  [1,2,3,12,11],
-  [3,4,14,13,12],
-  [4,5,6,15,14],
-  [6,7,17,16,15],
-  [7,8,9,18,17]]
+# for each cell, the corners of its boundary
+Poly3 = [        
+  [0,8,9,1,2], [0,2,3,4,5], [0,5,6,7,8],
+  [1,9,21,10,11], [1,2,3,13,12,11], [3,4,15,14,13],
+  [4,5,6,17,16,15], [6,7,19,18,17], [7,8,9,21,20,19]]
+Poly4 = [        
+  [0,8,9,1,2], [0,2,3,4,5], [0,5,6,7,8],
+  [1,9,23,24,10,11],[1,2,3,13,12,11],[3,4,16,15,14,13],
+  [4,5,6,18,17,16],[6,7,21,20,19,18],[7,8,9,23,22,21],
+  [10,24,42,25,26],[10,11,12,28,27,26],[12,13,14,30,29,28],
+  [14,15,32,31,30],[15,16,17,34,33,32],[17,18,19,36,35,34],
+  [19,20,38,37,36],[20,21,22,40,39,38],[22,23,24,42,41,40]]
 
 def setDualEdges(b):
   edges = DE[0]
@@ -274,6 +276,7 @@ def printData():
   CornerEdges = setCornerEdges(base)
   emitTuples(CornerEdges,'CornerEdges',len(CornerEdges))
   if base==3: emitTuples(Poly3,'Polygons',len(Poly3))
+  if base==4: emitTuples(Poly4,'Polygons',len(Poly4))
 
 def printTail(maxx, L):
   f = open('geo-tail.eps','r')
@@ -288,7 +291,7 @@ def printTail(maxx, L):
   print('false false FontSelect')
   for instr in L:
     print(instr, end='')
-  #print(maxx, '3 0 BoardPerimOnly')
+  print(maxx, '2 0 BoardPerimOnly')
 
 printHead(mmx[0], mmx[1], mmx[2], mmx[3])
 printBody()
