@@ -1,12 +1,12 @@
 /LabelString {   % cell (str) strlen LabelString
     3 dict begin /strlen exch def /str exch def /cell exch def
-    NewCenters cell GoToCenter moveto
+    NewCenters cell GoToPoint moveto
     TextWidth strlen mul 0.65 mul neg TextHeight 0.28 mul neg rmoveto
     str show
 end } def
 
 /ShadedStone { 3 dict begin /rad exch def /shade exch def /cell
-    NewCenters cell GoToCenter rad 0 360 arc
+    NewCenters cell GoToPoint rad 0 360 arc
     0 shade FillAndStroke
 end } def
 

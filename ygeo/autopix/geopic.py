@@ -99,6 +99,17 @@ Trips = [
    [15,25,26],[15,26,27],[15,16,27],[16,27,28],[16,17,28],[17,28,29],
    [9,17,29],[9,18,29]]] #layer 4
 
+Poly3 = [        # for each cell, the corners of its boundary
+  [0,8,9,1,2],
+  [0,2,3,4,5],
+  [0,5,6,7,8],
+  [1,9,18,10,11],
+  [1,2,3,12,11],
+  [3,4,14,13,12],
+  [4,5,6,15,14],
+  [6,7,17,16,16],
+  [7,8,9,18,17]]
+
 def setDualEdges(b):
   edges = DE[0]
   for j in range(b-2):
@@ -200,11 +211,12 @@ def emitNodes(N,label,num):
   print('] def')
   print('')
 
-def emitEdges(E,label,num):
+def emitTuples(E,label,num):
   print('/',label,'[', sep='')
-  for ee in E: print('[', ee[0], ee[1], ']')
+  #for ee in E: print('[', ee[0], ee[1], ']')
+  for ee in E: 
+    print('[' + ' '.join([str(j) + ' ' for j in ee]) + ']')
   print('] def')
-  print('')
 
 def showCenters(b, s, d):
   N = cellCenters(b, s, d)
@@ -272,9 +284,10 @@ def printData():
   emitNodes(NewCenters,'NewCenters',len(NewCenters))
   emitNodes(Corners,'Corners',len(Corners))
   DualEdges = setDualEdges(base)
-  emitEdges(DualEdges,'DualEdges',len(DualEdges))
+  emitTuples(DualEdges,'DualEdges',len(DualEdges))
   CornerEdges = setCornerEdges(base)
-  emitEdges(CornerEdges,'CornerEdges',len(CornerEdges))
+  emitTuples(CornerEdges,'CornerEdges',len(CornerEdges))
+  if base==3: emitTuples(Poly3,'Polygons',len(Poly3))
 
 def printTail(maxx, L):
   f = open('geo-tail.eps','r')
