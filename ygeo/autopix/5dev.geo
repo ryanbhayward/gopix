@@ -1,32 +1,23 @@
 base 5
 
- 0 .7 FillPoly
- 1 .7 FillPoly
- 2 .7 FillPoly
- 3 .3 FillPoly
- 4 .7 FillPoly
- 5 .3 FillPoly
- 6 .7 FillPoly
- 7 .3 FillPoly
- 8 .7 FillPoly
- 9 .3 FillPoly
-10 .7 FillPoly
-11 .7 FillPoly
-12 .3 FillPoly
-13 .7 FillPoly
-14 .7 FillPoly
-15 .7 FillPoly
-16 .7 FillPoly
-17 .7 FillPoly
-18 .7 FillPoly
-19 .7 FillPoly
-20 .7 FillPoly
-21 .7 FillPoly
-22 .7 FillPoly
-23 .7 FillPoly
-24 .7 FillPoly
-25 .7 FillPoly
-26 .7 FillPoly
-27 .7 FillPoly
-28 .7 FillPoly
-29 .7 FillPoly
+ 0 WP
+ 2 WP
+ 3 BP
+ 4 WP
+ 6 WP
+ 7 BP
+ 8 WP
+ 9 BP
+12 BP
+13 WP
+14 WP
+15 WP
+17 WP
+18 WP
+19 WP
+21 WP
+22 WP
+23 WP
+26 WP
+27 WP
+29 WP

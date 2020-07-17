@@ -287,18 +287,18 @@ def printData():
   emitTuples(Poly[base-3],'Polygons',len(Poly[base-3]))
 
 def printTail(maxx, L):
-  f = open('geo-tail.eps','r')
-  for line in f: print(line, end='')
-  print('gsave', maxx, '2.0 Fillgray BoardPerimFill grestore')
+  #f = open('geo-tail.eps','r')
+  #for line in f: print(line, end='')
+  print('gsave', maxx, '2.0 FillGray BoardPerimFill grestore')
   #print('Centers ShowNodes')                 #uncomment for centers
   #print('NewCenters ShowNodes')           
   #print('NewCenters DualEdges ShowEdges')    #uncomment for new-center dual
   #print('Centers DualEdges ShowEdges')       #uncomment for original dual
   #print('Corners ShowNodes')                 #uncomment for corner nodes
-  print('Corners CornerEdges ShowEdges')
   print('false false FontSelect')
   for instr in L:
     print(instr, end='')
+  print('Corners CornerEdges ShowEdges')
   print(maxx, '2 0 BoardPerimOnly')
 
 printHead(mmx[0], mmx[1], mmx[2], mmx[3])
