@@ -172,3 +172,15 @@ end } def
   cell LightGray FillPoly
 end } def
 
+/BPL { % cell (str) strlen
+    3 dict begin /strlen exch def /str exch def /cell exch def
+    cell BP
+    gsave 1 setgray cell str strlen LabelString grestore
+end } def
+
+/WPL { % cell (str) strlen
+    3 dict begin /strlen exch def /str exch def /cell exch def
+    cell WP
+    cell str strlen LabelString
+end } def
+
