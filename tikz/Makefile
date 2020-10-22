@@ -1,6 +1,7 @@
 LATEX = latex
 DVIPS = dvips -Ppdf -t letter
-PPR = net
+#PPR = digraph-negwt
+PPR = backtrack
 
 pdf: clean full good ps 
 	ps2pdf $(PPR).ps
@@ -12,7 +13,8 @@ ps: $(PPR).dvi
 	$(DVIPS) $(PPR) -o
 
 good: $(PPR).dvi
-	$(DVIPS) -Ppdf -G0 -tletter $(PPR) -o
+	#$(DVIPS) -Ppdf -G0 -tletter $(PPR) -o
+	$(DVIPS) -G0 $(PPR) -o
 
 clean:
 	-rm $(PPR).dvi $(PPR).blg $(PPR).bbl *.aux *.log $(PPR).ps $(PPR).pdf
