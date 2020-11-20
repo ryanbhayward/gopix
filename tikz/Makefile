@@ -1,7 +1,7 @@
 LATEX = latex
 DVIPS = dvips -Ppdf -t letter
 #PPR = digraph-negwt
-PPR = backtrack
+PPR = net
 
 pdf: clean full good ps 
 	ps2pdf $(PPR).ps
