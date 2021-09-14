@@ -1,0 +1,29 @@
+% tikz: satisfiability implication digraphs
+\documentclass[12pt]{article}
+\usepackage{calc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.markings}
+\tikzstyle{vertex}=[circle, draw, inner sep=2pt, minimum size=18pt]
+\newcommand{\vertex}{\node[vertex]}
+\newcounter{Angle}
+
+\pagestyle{empty}
+\begin{document}
+{\large\bf
+\[\begin{tikzpicture}[x=.3cm, y=.3cm
+]
+\vertex (a) at (0,  0) {A 28};
+\vertex (b) at (0, 20) {B 20};
+\vertex (c) at (10, 0) {C 22};
+\vertex (d) at (20,20) {D   };
+\path
+(a) edge node [left]  {20} (b) 
+    edge node [below] {10} (c) 
+(b) edge node [above] {20} (d) 
+(c) edge node [left]  {23 } (d)
+;
+\end{tikzpicture}\]
+\vfill
+
+}
+\end{document}
