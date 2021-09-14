@@ -26,7 +26,7 @@ end } def
 
 /CheckerPoint { CellDiameter ScaleCheckerPair } def
 
-/DrawGoBoard { 2 dict begin
+/DrawCheckBrd { 2 dict begin
     gsave
     newpath 0 0 GoPoint moveto
     0    Rows GoPoint rlineto
@@ -83,12 +83,12 @@ end } def
     2 dict begin /italic exch def /bold exch def
     bold {
         italic
-        { /Times-BoldItalic findfont TextHeight scalefont setfont }
-        { /Times-Bold findfont TextHeight scalefont setfont }
+        { /Courier-BoldItalic findfont TextHeight scalefont setfont }
+        { /Courier-Bold findfont TextHeight scalefont setfont }
         ifelse}
         {
-        italic {/Times-Italic findfont TextHeight scalefont setfont}
-        { /Times findfont TextHeight scalefont setfont }
+        italic {/Courier-Italic findfont TextHeight scalefont setfont}
+        { /Courier findfont TextHeight scalefont setfont }
         ifelse}
     ifelse
 end } def
@@ -99,4 +99,4 @@ end } def
 /BL {0.0 GoStoneLabelled } def
 
 .25 .25 GoPoint translate
-DrawGoBoard
+DrawCheckBrd

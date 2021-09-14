@@ -1,0 +1,2 @@
+modified go-body so that we can print checkers-style boards,
+i.e. with stones inside cells

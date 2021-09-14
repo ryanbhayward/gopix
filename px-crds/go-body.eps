@@ -49,6 +49,25 @@ end } def
     grestore
 end } def
 
+/DrawCheckersBoard { 2 dict begin
+    gsave
+    newpath 0 0 GoPoint moveto
+    0    Rows GoPoint rlineto
+    Cols 0        GoPoint rlineto
+    0    Rows neg GoPoint rlineto
+    closepath PerimeterWidth BoardShade FillAndStroke
+    LineWidth setlinewidth
+    1 1 Cols { /y exch def  % if more than 1 Row ...
+      Cols 1 gt { newpath y 0 GoPoint moveto
+                  0 Rows GoPoint rlineto stroke } if
+    } for
+    1 1 Rows { /x exch def  % if more than 1 Col ...
+      Rows 1 gt { newpath 0 x GoPoint moveto
+                  Cols 0 GoPoint rlineto stroke } if
+    } for
+    grestore
+end } def
+
 /Coordinates { 2 dict begin
     false false FontSelect CoordinatesShade setgray
     1 1 Rows { /j exch def
@@ -106,6 +125,14 @@ end } def
 /WL {1.0 GoStoneLabelled } def
 /BL {0.0 GoStoneLabelled } def
 
--.4 -.4 GoPoint translate
-DrawGoBoard
+% this preamble for go boards
+%-.4 -.4 GoPoint translate
+%DrawGoBoard
+
+%this preamble for checkers boards
+.5 .5 GoPoint translate
+DrawCheckersBoard
+-.5 -.5 GoPoint translate
+
+%this code for both boards
 Coordinates
