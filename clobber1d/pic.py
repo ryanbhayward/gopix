@@ -10,6 +10,7 @@ def getDiagram():
   hasDia = False
   L = sys.stdin.readlines()
   for k in range(len(L)): 
+    L[k] = ' '.join(L[k])
     L[k] = L[k].strip()
   for item in L:
     for c in item:
