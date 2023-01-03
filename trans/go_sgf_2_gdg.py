@@ -1,14 +1,16 @@
+#TODO: fix makemove, then input sgf, then make sgfmoves, then done
+
 #    input:  go sgf
 #    output: go gdg 
 from sys import stdin
 import numpy as np
-import copy
+#import copy
 
 """
 points on the board
 """
 
-EMPTY, BLACK, WHITE, BORDER, POINT_CHARS = 0, 1, 2, 999, '.*o'
+EMPTY, BLACK, WHITE, BORDER, POINT_CHARS = 0, 1, 2, -1, '.*o'
 
 def opponent(color):
   return BLACK + WHITE - color
@@ -50,7 +52,6 @@ go position
 
 class Position: # go board with movenumber values:
                 # odd/even movenum => black/white stone
-
   def __init__(self, r, c):
     self.R, self.C = r, c
     self.n, self.guarded_n = r * c,  (r+2) * (c+1)
@@ -83,8 +84,47 @@ class Position: # go board with movenumber values:
       b += this_row + '\n'
     return b
 
-  def makemove(self, where, color):
-    self.brd[where] = color
+  # brd entries are move numbers: parity gives stone color
+  def color(self, j):
+    entry = self.brd[j]
+    if entry == EMPTY:
+      return EMPTY
+    elif entry == BORDER:
+      return BORDER
+    elif 1 == entry%2:
+      return BLACK
+    else:
+      return WHITE
+
+  def tromp_taylor_score(self):
+    bs, bt, ws, wt, empty_seen = 0, 0, 0, 0, set()
+    for p in range(self.guarded_n):
+      if   self.color(p) == BLACK:
+        bs += 1
+      elif self.color(p) == WHITE:
+        ws += 1
+      elif (self.brd[p] == EMPTY) and (p not in empty_seen):
+        b_nbr, w_nbr = False, False
+        empty_seen.add(p)
+        empty_points = [p]
+        territory = 1
+        while (len(empty_points) > 0):
+          q = empty_points.pop()
+          for x in self.nbrs[q]:
+            b_nbr |= (self.color(x) == BLACK)
+            w_nbr |= (self.color(x) == WHITE)
+            if self.brd[x] == EMPTY and x not in empty_seen:
+              empty_seen.add(x)
+              empty_points.append(x)
+              territory += 1
+        if   b_nbr and not w_nbr:
+          bt += territory
+        elif w_nbr and not b_nbr:
+          wt += territory
+    return bs, bt, ws, wt
+
+  def makemove(self, where, movenum):
+    self.brd[where] = movenum
     cap = []
     for p in self.nbrs[where]:
       if self.brd[p] == opponent(color):
@@ -100,9 +140,28 @@ class Position: # go board with movenumber values:
       return cap, False
     return cap, True
 
+def score_difference(score):
+  return score[0] + score[1] - (score[2] + score[3])
+
+def report(p):
+  with open('out.gdg', 'w', encoding="utf-8") as f:
+    tts = p.tromp_taylor_score()
+    sd = score_difference(tts)
+    f.write('score ' + str(tts))
+    if sd == 0:
+      f.write(': black and white draw\n')
+    elif sd > 0:
+      f.write(': black wins by ' + str(sd) + ' \n')
+    else:
+      f.write(': white wins by ' + str(-sd) + ' \n')
+
 p = Position(2,3)
 print(p.brdstring())
+report(p)
 p.brd[coord_to_point(1,2,3)] = 113
+p.brd[coord_to_point(0,0,3)] = 24
+p.brd[coord_to_point(1,1,3)] = 2
 print(p.brdstring())
+report(p)
 
 #parse_sgf()
