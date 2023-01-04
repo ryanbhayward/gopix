@@ -45,6 +45,7 @@ def parse_sgf():
         movenum += 1
         if 1 == movenum % 10:
           print('')
+  print('')
 
 """
 go position
@@ -158,10 +159,11 @@ def report(p):
 p = Position(2,3)
 print(p.brdstring())
 report(p)
-p.brd[coord_to_point(1,2,3)] = 113
-p.brd[coord_to_point(0,0,3)] = 24
-p.brd[coord_to_point(1,1,3)] = 2
+p.brd[coord_to_point(1,2,3)] = 1
+p.brd[coord_to_point(0,0,3)] = 2
+p.brd[coord_to_point(0,1,3)] = 4
+p.brd[coord_to_point(1,1,3)] = 5
 print(p.brdstring())
 report(p)
 
-#parse_sgf()
+parse_sgf()
