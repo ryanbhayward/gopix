@@ -5,12 +5,12 @@
 /CellDiameter  20   def 
 /BoardShade .9 def
 /CoordinatesShade .2 def
-/TextHeight 12 def
+/TextHeight 8 def
 /TextWidth TextHeight 0.45 mul def
-/Chars {[(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)(k)(l)(m)
-  (n)(o)(p)(q)(r)(s)(t)(u)(v)(w)(x)(y)(z)]} def
-/Digits {[(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)(11)(12)(13)
-  (14)(15)(16)(17)(18)(19)(20)(21)(22)(23)(24)(25)(26)]} def
+/Chars {[(A)(B)(C)(D)(E)(F)(G)(H)(J)(K)
+         (L)(M)(N)(O)(P)(Q)(R)(S)(T)]} def % go column labels skip letter I
+/Digits {[ (1) (2) (3) (4) (5) (6) (7) (8) (9)(10)
+          (11)(12)(13)(14)(15)(16)(17)(18)(19)]} def
 
 /ScalePair { % stack: ... x y size ==> ...  x*size y*size
    3 dict begin /size exch def /y exch def /x exch def
@@ -25,11 +25,11 @@ end } def
 /GoPoint { CellDiameter ScalePair } def
 
 /DrawGoBoard { 2 dict begin
-    gsave
-    newpath .5 .5 GoPoint moveto
-    0    Rows     GoPoint rlineto
-    Cols 0        GoPoint rlineto
-    0    Rows neg GoPoint rlineto
+    gsave newpath 
+    -.5         -.5       GoPoint moveto
+    0      Rows 2 add   GoPoint rlineto
+    Cols 2 add  0       GoPoint rlineto
+    0    Rows 2 add neg GoPoint rlineto
     closepath PerimeterWidth BoardShade FillAndStroke
     LineWidth setlinewidth
     1 1 Cols { /y exch def  % if only 1 Row, then nonzero length
@@ -71,10 +71,12 @@ end } def
 /Coordinates { 2 dict begin
     false false FontSelect CoordinatesShade setgray
     1 1 Rows { /j exch def
-      0 .2 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
+      0 0 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
+    Rows 1 add 0 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
     } for
     1 1 Cols { /i exch def
-  i 1 .8 sub Chars i 1 sub get 1 LabelString
+      i  1 1 sub Chars i 1 sub get 1 LabelString
+      i Cols 1 add Chars i 1 sub get 1 LabelString
     } for
 end } def
 
@@ -89,7 +91,7 @@ end } def
     newpath
     i j GoPoint /y exch def /x exch def
     x y moveto
-    TextWidth strlen mul 0.5 mul neg TextHeight 0.33 mul neg rmoveto
+    str dup stringwidth pop -2 div TextHeight 0.33 mul neg rmoveto
     str show
 end } def
 
@@ -128,13 +130,13 @@ end } def
 /BL {0.0 GoStoneLabelled } def
 
 % this preamble for go boards
-%-.4 -.4 GoPoint translate
-%DrawGoBoard
+-.4 -.4 GoPoint translate
+DrawGoBoard
 
 %this preamble for checkers boards
-.5 .5 GoPoint translate
-DrawCheckersBoard
--.5 -.5 GoPoint translate
+%.5 .5 GoPoint translate
+%DrawCheckersBoard
+%-.5 -.5 GoPoint translate
 
 %this code for both boards
 Coordinates
