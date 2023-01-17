@@ -1,7 +1,6 @@
 LATEX = latex
 DVIPS = dvips -Ppdf -t letter
-#PPR = digraph-negwt
-PPR = netnet
+PPR = show
 
 pdf: clean full good ps 
 	ps2pdf $(PPR).ps
@@ -13,7 +12,6 @@ ps: $(PPR).dvi
 	$(DVIPS) $(PPR) -o
 
 good: $(PPR).dvi
-	#$(DVIPS) -Ppdf -G0 -tletter $(PPR) -o
 	$(DVIPS) -G0 $(PPR) -o
 
 clean:
