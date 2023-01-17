@@ -12,7 +12,7 @@ def getDiagram():
 
 def printHead(rows, cols):
   print '%!PS-Adobe-3.0'
-  print '%%BoundingBox: 0 0',(cols+.5)*2*CellRadius, (rows+.5)*2*CellRadius
+  print '%%BoundingBox: 0 0',(cols+1.5)*2*CellRadius, (rows+1.5)*2*CellRadius
   print '%%Pages: 0\n%%EndComments'
   print '/OriginX 0 def\n/OriginY 0 def'
   print '/Rows', rows, 'def\n/Cols', cols,'def'
