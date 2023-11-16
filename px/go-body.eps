@@ -76,12 +76,12 @@ end } def
     2 dict begin /italic exch def /bold exch def
     bold {
         italic
-        { /Times-BoldItalic findfont TextHeight scalefont setfont }
-        { /Times-Bold findfont TextHeight scalefont setfont }
+        { /Courier-BoldItalic findfont TextHeight scalefont setfont }
+        { /Courier findfont TextHeight scalefont setfont }
         ifelse}
         {
-        italic {/Times-Italic findfont TextHeight scalefont setfont}
-        { /Times findfont TextHeight scalefont setfont }
+        italic {/Courier-Italic findfont TextHeight scalefont setfont}
+        { /Courier findfont TextHeight scalefont setfont }
         ifelse}
     ifelse
 end } def
