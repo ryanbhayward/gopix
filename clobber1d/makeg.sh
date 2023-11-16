@@ -1,3 +1,3 @@
 for f in *.g; do
-  python pic.py < "$f" > "${f%.g}.eps"
+  python3 pic.py < "$f" > "${f%.g}.eps"
 done
