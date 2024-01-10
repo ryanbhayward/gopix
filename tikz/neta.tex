@@ -1,0 +1,106 @@
+% tikz: satisfiability implication digraphs
+\documentclass[12pt]{article}
+\usepackage{calc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.markings}
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=18pt]
+\newcommand{\vertex}{\node[vertex]}
+\newcounter{Angle}
+
+\pagestyle{empty}
+\begin{document}
+{%\large\bf
+\[\begin{tikzpicture}[x=1.5cm, y=1.5cm
+    ,every edge/.style={
+        draw,
+        postaction={decorate,
+                    decoration={markings,mark=at position .6 with
+		    {\arrow[line width=2pt,black]{latex}}} } }
+]
+\vertex (s) at (.5,0) {s};
+\vertex (a) at (2,-1) {a};
+\vertex (b) at (2,0)  {b};
+\vertex (c) at (2,1)  {c};
+\vertex (d) at (4,-1) {d};
+\vertex (e) at (4,1)  {e};
+\vertex (t) at (5.5,0) {t};
+\path
+(s) edge node [below,left] {1} (a) 
+    edge node [below,left] {4} (b) 
+    edge node [above,left] {1} (c) 
+(a) edge node [above,left] {2} (d)
+(b) edge node [above,left] {1} (a) 
+    edge node [above,left] {1} (c) 
+    edge node [above,left] {3} (e) 
+(c) edge node [above]      {2} (e)
+(d) edge node [above,left] {5} (t)
+(e) edge node [above,left] {1} (a) 
+    edge node [above,left] {1} (d) 
+    edge node [above,left] {1} (t)
+;
+\end{tikzpicture}\]
+\vfill \ 
+
+\[\begin{tikzpicture}[x=1.5cm, y=1.5cm
+    ,every edge/.style={
+        draw,
+        postaction={decorate,
+                    decoration={markings,mark=at position .6 with
+		    {\arrow[line width=2pt,black]{latex}}} } }
+]
+\vertex (s) at (.5,0) {s};
+\vertex (a) at (2,-1) {a};
+\vertex (b) at (2,0)  {b};
+\vertex (c) at (2,1)  {c};
+\vertex (d) at (4,-1) {d};
+\vertex (e) at (4,1)  {e};
+\vertex (t) at (5.5,0) {t};
+\path
+(s) edge node [below,left] {1} (a) 
+    edge node [below,left] {3} (b) 
+    edge node [above,left] {1} (c) 
+(a) edge node [above,left] {2} (d)
+(b) edge node [above,left] {1} (a) 
+    edge node [above,left] {1} (c) 
+    edge node [above,left] {3} (e) 
+(c) edge node [above]      {2} (e)
+(d) edge node [above,left] {4} (t)
+(e) edge node [above,left] {1} (a) 
+    edge node [above,left] {1} (d) 
+    edge node [above,left] {1} (t)
+;
+\end{tikzpicture}\]
+\vfill \ 
+
+\[\begin{tikzpicture}[x=1.5cm, y=1.5cm
+    ,every edge/.style={
+        draw,
+        postaction={decorate,
+                    decoration={markings,mark=at position .6 with
+		    {\arrow[line width=2pt,black]{latex}}} } }
+]
+\vertex (s) at (.5,0) {s};
+\vertex (a) at (2,-1) {a};
+\vertex (b) at (2,0)  {b};
+\vertex (c) at (2,1)  {c};
+\vertex (d) at (4,-1) {d};
+\vertex (e) at (4,1)  {e};
+\vertex (t) at (5.5,0) {t};
+\path
+(s) edge node [below,left] {1} (a) 
+    edge node [below,left] {5} (b) 
+    edge node [above,left] {1} (c) 
+(a) edge node [above,left] {2} (d)
+(b) edge node [above,left] {1} (a) 
+    edge node [above,left] {1} (c) 
+    edge node [above,left] {3} (e) 
+(c) edge node [above]      {2} (e)
+(d) edge node [above,left] {6} (t)
+(e) edge node [above,left] {1} (a) 
+    edge node [above,left] {1} (d) 
+    edge node [above,left] {1} (t)
+;
+\end{tikzpicture}\]
+\vfill \ 
+
+\end{document}
