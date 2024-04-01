@@ -72,11 +72,11 @@ end } def
     false false FontSelect CoordinatesShade setgray
     1 1 Rows { /j exch def
       0 0 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
-    Rows 1 add 0 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
+    Cols 1 add 0 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
     } for
     1 1 Cols { /i exch def
       i  1 1 sub Chars i 1 sub get 1 LabelString
-      i Cols 1 add Chars i 1 sub get 1 LabelString
+      i Rows 1 add Chars i 1 sub get 1 LabelString
     } for
 end } def
 
