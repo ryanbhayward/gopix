@@ -1,2 +1,4 @@
 modified go-body so that we can print checkers-style boards,
 i.e. with stones inside cells
+
+AGLS1 from wikipedia sgf, processed with go-helper (?) in gpa
