@@ -1,5 +1,4 @@
 # convert gdg-crds to gdg-plain 
-# also reverse row order
 import sys
 
 L = sys.stdin.readlines()
@@ -11,5 +10,5 @@ for k in range(len(L)):
     if ej.isnumeric():
       entries[j] = 'o' if int(ej)%2 == 0 else 'x'
   E.append(entries)
-for e in reversed(E):
+for e in E:
   print((' ').join(e))
