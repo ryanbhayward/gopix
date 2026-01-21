@@ -4,8 +4,8 @@
 /PerimeterWidth 0.2 def 
 /CellDiameter  20   def 
 /BoardShade .9 def
-/CoordinatesShade .2 def
-/TextHeight 8 def
+/CoordinatesShade .6 def
+/TextHeight 6 def
 /TextWidth TextHeight 0.45 mul def
 /Chars {[(A)(B)(C)(D)(E)(F)(G)(H)(J)(K)
          (L)(M)(N)(O)(P)(Q)(R)(S)(T)]} def % go column labels skip letter I
@@ -75,7 +75,7 @@ end } def
     %Cols 1 add 0 add j Digits j 1 sub get Rows 9 gt {2} {1} ifelse LabelString
     } for
     1 1 Cols { /i exch def
-       i  1 1 sub Chars i 1 sub get 1 LabelString
+       i 1 1 sub Chars i 1 sub get 1 LabelString
     %  i Rows 1 add Chars i 1 sub get 1 LabelString
     } for
 end } def
