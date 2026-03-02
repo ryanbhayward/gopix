@@ -4,6 +4,7 @@ PPR = show
 
 pdf: clean full good ps 
 	ps2pdf $(PPR).ps
+	open $(PPR).pdf
 
 full: 
 	$(LATEX) $(PPR)
